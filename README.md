@@ -12,7 +12,7 @@
     <a href="https://github.com/yellowfish0331" target='_blank'>Yu Huang<sup>1,*</sup></a>&emsp;
     <a href="https://github.com/Timekeeper-J" target='_blank'>Dijiang Dong<sup>1,*</sup></a>&emsp;
     <a href="https://github.com/miracle-techlink" target='_blank'>Yue Liu<sup>2</sup></a>&emsp;
-    Peiran Ren<sup>2,†</sup>&emsp;
+    <a href="https://scholar.google.com/citations?user=x5dEuxsAAAAJ&hl=en" target='_blank'>Peiran Ren<sup>2,†</sup></a>&emsp;
     <a href="https://shenwei1231.github.io/" target='_blank'>Wei Shen<sup>1,†</sup></a>
 </div>
 <div>
@@ -37,7 +37,7 @@
         <a href="./LICENSE" target='_blank'>
         <img src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg">
         </a>
-        <img src="https://api.infinitescript.com/badgen/count?name=SJTU-DeepVisionLab/RoboInF&ltext=Visitors&color=029C8D">
+        <img src="https://visitor-badge.laobi.icu/badge?page_id=SJTU-DeepVisionLab.RoboInF&left_text=Visitors&left_color=%23112D44&right_color=%23029C8D">
     </h4>
 </div>
 
