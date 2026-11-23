@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tasks | RoboInF Wiki</title>
+<meta name="description" content="RoboInF: A Benchmark for Instruction Fidelity in Robotic Manipulation.">
+<link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(()=>{const t=localStorage.getItem('roboinf-theme');if(t)document.documentElement.dataset.theme=t})()</script>
+</head>
+<body>
+<header class="nav">
+  <div class="icons"><button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+  <a class="brand" href="../"><img class="logo-light" src="../assets/img/logo.svg" alt="RoboInF"><img class="logo-dark" src="../assets/img/logo_dark.svg" alt="RoboInF"><span>Wiki</span></a>
+  <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search<kbd>⌘K</kbd></div>
+  <div class="icons">
+    <a href="#" title="GitHub (coming soon)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+    <button onclick="toggleTheme()" title="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</header>
+<div class="page">
+<aside class="side">
+  <a class="top" href="../">Home</a>
+  <details><summary>RoboInF</summary>
+    <a href="../#video">Video</a><a href="../#overview">Abstract</a><a href="../#engine">Data Collection Engine</a><a href="../#dataset">RoboInF-4K Dataset</a><a href="../#results">Leaderboard</a><a href="../#cite">Citation</a>
+  </details>
+  <details open><summary>Tasks</summary>
+    <a class=" on" href="../tasks/">Overview</a>
+    <a class="" href="../tasks/place-bottle/"><i class="dot" style="background:#2476B8"></i>Place Bottle</a><a class="" href="../tasks/shake-bottle/"><i class="dot" style="background:#2476B8"></i>Shake Bottle</a><a class="" href="../tasks/orient-fan/"><i class="dot" style="background:#C68A28"></i>Orient Fan</a><a class="" href="../tasks/select-switch/"><i class="dot" style="background:#C68A28"></i>Select Switch</a><a class="" href="../tasks/transport-via-divider/"><i class="dot" style="background:#029C8D"></i>Transport via Divider</a><a class="" href="../tasks/open-laptop/"><i class="dot" style="background:#029C8D"></i>Open Laptop</a><a class="" href="../tasks/sort-blocks-in-order/"><i class="dot" style="background:#112D44"></i>Sort Blocks in Order</a><a class="" href="../tasks/press-buttons-in-order/"><i class="dot" style="background:#112D44"></i>Press Buttons in Order</a>
+  </details>
+  <details><summary>Usage</summary>
+    <a class="soon-link" href="#" title="Coming soon">Install &amp; Download<span class="soon-tag">soon</span></a><a class="soon-link" href="#" title="Coming soon">Policy Training<span class="soon-tag">soon</span></a><a class="soon-link" href="#" title="Coming soon">Quick Evaluation<span class="soon-tag">soon</span></a><a class="soon-link" href="#" title="Coming soon">Checkers &amp; Metrics<span class="soon-tag">soon</span></a>
+  </details>
+  <details><summary>Dataset</summary>
+    <a href="../#dataset">RoboInF-4K Overview</a><a class="soon-link" href="#" title="Coming soon">IR Format<span class="soon-tag">soon</span></a><a class="soon-link" href="#" title="Coming soon">Download<span class="soon-tag">soon</span></a>
+  </details>
+  <details><summary>Community</summary>
+    <a href="../#results">Leaderboard</a><a class="soon-link" href="#" title="Coming soon">Submit Results<span class="soon-tag">soon</span></a><a class="soon-link" href="#" title="Coming soon">Common Issues<span class="soon-tag">soon</span></a>
+  </details>
+</aside>
+<main>
+  <section class="doc-head" id="top"><div class="inner">
+    <div class="crumbs"><a href="../">RoboInF</a> / Tasks</div>
+    <h1 class="title">Tasks</h1>
+    <p class="lede">RoboInF contains <b>eight base tasks</b> built on RoboTwin 2.0. Each task has six to twelve expert-validated <b>instruction branches</b> that start from the same initial scene and robot state. In total there are 63 branch types, 566 eligible scenes and 4,242 demonstrations.</p>
+  </div></section>
+  <section class="doc"><div class="inner">
+    <p>Each task page shows two branches side by side, the instruction template and its variables, every branch of one shared scene as a video, the checker conditions used for scoring, the clear and randomized appearance, and per-task results. Hover over (or tap) a branch video to play it.</p>
+
+    <h2 id="aspects">Instruction aspects</h2>
+    <p>Instruction conditions are organized around three aspects. A task can combine several of them, for example a target object together with the arm to use.</p>
+    <div class="tbl info"><table class="checks"><tr><th>Aspect</th><th>Conditions</th><th>Tasks</th></tr><tr><td><span class="chip"><i style="background:#2476B8"></i>Goal selection</span></td><td>Which object, destination, or articulated component to operate.</td><td><a href="place-bottle/">Place Bottle</a>, <a href="select-switch/">Select Switch</a></td></tr><tr><td><span class="chip"><i style="background:#C68A28"></i>Procedural adherence</span></td><td>Arm assignment, routes, motion patterns, repetition counts, or operation orders.</td><td><a href="place-bottle/">Place Bottle</a>, <a href="shake-bottle/">Shake Bottle</a>, <a href="select-switch/">Select Switch</a>, <a href="transport-via-divider/">Transport via Divider</a>, <a href="sort-blocks-in-order/">Sort Blocks in Order</a>, <a href="press-buttons-in-order/">Press Buttons in Order</a></td></tr><tr><td><span class="chip"><i style="background:#029C8D"></i>Fine-grained specification</span></td><td>Quantities such as object orientation, holding pose, joint angle, and contact region.</td><td><a href="shake-bottle/">Shake Bottle</a>, <a href="orient-fan/">Orient Fan</a>, <a href="open-laptop/">Open Laptop</a></td></tr></table></div>
+
+    <h2 id="protocol">Evaluation protocol</h2>
+    <p>The test split contains <b>861 instruction branches</b>. Each one is evaluated under <code>test_clear</code> and <code>test_random</code>. Sibling branches share the same physical scene and camera configuration. Each clear/random pair also shares its instruction and action budget, and <code>test_random</code> reuses RoboTwin's domain randomization for textures, backgrounds and lighting. Policies replan every 20 actions until the task's action budget is reached. The simulator then advances 250 passive physics steps before final scoring.</p>
+    <div class="rule"><div><b>Task success (TR)</b>The terminal goal of the task is reached.</div><div><b>Joint success (JR)</b>Task success <i>and</i> every applicable instruction constraint is satisfied throughout execution.</div></div>
+
+    <h2 id="statistics">Dataset statistics</h2>
+    <div class="tbl"><table class="stat-t"><tr><th>Task</th><th>Candidate scenes</th><th>Eligible</th><th>Branches / scene</th><th>Eligible rate (%)</th><th>Train</th><th>Val</th><th>Test</th><th>Expert iterations</th><th>Action budget</th></tr><tr><td><a href="place-bottle/">Place Bottle</a></td><td>287</td><td>63</td><td>8</td><td>21.9</td><td>296</td><td>104</td><td>104</td><td>10</td><td>400</td></tr><tr><td><a href="shake-bottle/">Shake Bottle</a></td><td>75</td><td>63</td><td>8</td><td>84.0</td><td>296</td><td>104</td><td>104</td><td>8</td><td>700</td></tr><tr><td><a href="orient-fan/">Orient Fan</a></td><td>72</td><td>63</td><td>8</td><td>87.5</td><td>296</td><td>104</td><td>104</td><td>5</td><td>400</td></tr><tr><td><a href="select-switch/">Select Switch</a></td><td>109</td><td>84</td><td>6</td><td>77.1</td><td>300</td><td>102</td><td>102</td><td>2</td><td>400</td></tr><tr><td><a href="transport-via-divider/">Transport via Divider</a></td><td>210</td><td>94</td><td>6</td><td>44.8</td><td>336</td><td>114</td><td>114</td><td>10</td><td>400</td></tr><tr><td><a href="open-laptop/">Open Laptop</a></td><td>87</td><td>64</td><td>9</td><td>73.6</td><td>342</td><td>117</td><td>117</td><td>2</td><td>700</td></tr><tr><td><a href="sort-blocks-in-order/">Sort Blocks in Order</a></td><td>100</td><td>89</td><td>6</td><td>89.0</td><td>318</td><td>108</td><td>108</td><td>5</td><td>1,000</td></tr><tr><td><a href="press-buttons-in-order/">Press Buttons in Order</a></td><td>66</td><td>46</td><td>12</td><td>69.7</td><td>336</td><td>108</td><td>108</td><td>10</td><td>600</td></tr><tr class="avg"><td>Total</td><td>1006</td><td>566</td><td>–</td><td>56.3</td><td>2520</td><td>861</td><td>861</td><td>–</td><td>–</td></tr></table></div>
+    <p class="legend">A candidate scene is eligible only when the expert satisfies JR on every instruction branch. Splits count episodes and are partitioned by scene.</p>
+
+    <h2 id="catalog">Task catalog</h2>
+    <div class="catalog"><a class="tcard" href="../tasks/place-bottle/"><div class="im"><img src="../assets/img/bottle_id.png" alt="" loading="lazy"><img class="ood" src="../assets/img/bottle_ood.png" alt="" loading="lazy"><em>clear ↔ random</em></div><div class="cap"><b>Place Bottle</b><span>8 branches · varies target object, destination, arm</span><span class="go">Task page →</span></div></a><a class="tcard" href="../tasks/shake-bottle/"><div class="im"><img src="../assets/img/shake_id.png" alt="" loading="lazy"><img class="ood" src="../assets/img/shake_ood.png" alt="" loading="lazy"><em>clear ↔ random</em></div><div class="cap"><b>Shake Bottle</b><span>8 branches · varies arm, holding pose, motion pattern</span><span class="go">Task page →</span></div></a><a class="tcard" href="../tasks/orient-fan/"><div class="im"><img src="../assets/img/fan_id.png" alt="" loading="lazy"><img class="ood" src="../assets/img/fan_ood.png" alt="" loading="lazy"><em>clear ↔ random</em></div><div class="cap"><b>Orient Fan</b><span>8 branches · varies object orientation</span><span class="go">Task page →</span></div></a><a class="tcard" href="../tasks/select-switch/"><div class="im"><img src="../assets/img/row_id.png" alt="" loading="lazy"><img class="ood" src="../assets/img/row_ood.png" alt="" loading="lazy"><em>clear ↔ random</em></div><div class="cap"><b>Select Switch</b><span>6 branches · varies target switch, arm</span><span class="go">Task page →</span></div></a><a class="tcard" href="../tasks/transport-via-divider/"><div class="im"><img src="../assets/img/divider_id.png" alt="" loading="lazy"><img class="ood" src="../assets/img/divider_ood.png" alt="" loading="lazy"><em>clear ↔ random</em></div><div class="cap"><b>Transport via Divider</b><span>6 branches · varies route, arm</span><span class="go">Task page →</span></div></a><a class="tcard" href="../tasks/open-laptop/"><div class="im"><img src="../assets/img/laptop_id.png" alt="" loading="lazy"><img class="ood" src="../assets/img/laptop_ood.png" alt="" loading="lazy"><em>clear ↔ random</em></div><div class="cap"><b>Open Laptop</b><span>9 branches · varies opening angle, contact region</span><span class="go">Task page →</span></div></a><a class="tcard" href="../tasks/sort-blocks-in-order/"><div class="im"><img src="../assets/img/sort_id.png" alt="" loading="lazy"><img class="ood" src="../assets/img/sort_ood.png" alt="" loading="lazy"><em>clear ↔ random</em></div><div class="cap"><b>Sort Blocks in Order</b><span>6 branches · varies execution order</span><span class="go">Task page →</span></div></a><a class="tcard" href="../tasks/press-buttons-in-order/"><div class="im"><img src="../assets/img/order_id.png" alt="" loading="lazy"><img class="ood" src="../assets/img/order_ood.png" alt="" loading="lazy"><em>clear ↔ random</em></div><div class="cap"><b>Press Buttons in Order</b><span>12 branches · varies execution order, arm</span><span class="go">Task page →</span></div></a></div>
+  </div></section>
+
+  <footer><div class="inner"><span>© 2026 RoboInF Team · Shanghai Jiao Tong University · Tongji University</span><span><a href="../#cite">Cite RoboInF</a></span></div></footer>
+</main>
+<aside class="toc"><h4>On this page</h4><a href="#top">Tasks</a><a href="#aspects">Instruction aspects</a><a href="#protocol">Evaluation protocol</a><a href="#statistics">Dataset statistics</a><a href="#catalog">Task catalog</a></aside>
+</div>
+<div id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
