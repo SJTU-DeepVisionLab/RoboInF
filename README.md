@@ -1,11 +1,81 @@
-# RoboInF
+<div align="center">
+<div style="text-align: center;">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://sjtu-deepvisionlab.github.io/RoboInF/assets/img/logo_dark.svg">
+        <img src="https://sjtu-deepvisionlab.github.io/RoboInF/assets/img/logo.svg" alt="RoboInF Logo" style="height: 52px;" height="52">
+    </picture>
+    <h2>A Benchmark for Instruction Fidelity in Robotic Manipulation</h2>
+</div>
 
-[Project and results](https://sjtu-deepvisionlab.github.io/RoboInF/) · [RoboInF-4K dataset](https://huggingface.co/datasets/JGuo666/RoboInF-4K) · [Evaluation protocol](docs/benchmark.md) · [Policy setup](docs/policies.md)
+<div>
+    <a href="https://guocalix.github.io/" target='_blank'>Jiawei Guo<sup>1,*,§</sup></a>&emsp;
+    <a href="https://github.com/yellowfish0331" target='_blank'>Yu Huang<sup>1,*</sup></a>&emsp;
+    <a href="https://github.com/Timekeeper-J" target='_blank'>Dijiang Dong<sup>1,*</sup></a>&emsp;
+    <a href="https://github.com/miracle-techlink" target='_blank'>Yue Liu<sup>2</sup></a>&emsp;
+    Peiran Ren<sup>2,†</sup>&emsp;
+    <a href="https://shenwei1231.github.io/" target='_blank'>Wei Shen<sup>1,†</sup></a>
+</div>
+<div>
+    <sup>1</sup>Shanghai Jiao Tong University&emsp;
+    <sup>2</sup>Tongji University
+</div>
+<div>
+    <sup>*</sup>Co-first authors&emsp;<sup>§</sup>Project leader&emsp;<sup>†</sup>Corresponding authors
+</div>
 
-RoboInF evaluates instruction fidelity in simulated bimanual manipulation. Several instructions share an initial scene: a policy might place the same object using a different arm, choose a different destination, or perform a sequence in a different order. Task success (TR) measures completion; joint success (JR) also requires satisfying every instruction constraint.
+<div>
+    <h4 align="center">
+        <a href="https://sjtu-deepvisionlab.github.io/RoboInF/" target='_blank'>
+        <img src="https://img.shields.io/badge/🤖-Project%20Page-029C8D">
+        </a>
+        <a href="https://huggingface.co/datasets/JGuo666/RoboInF-4K" target='_blank'>
+        <img src="https://img.shields.io/badge/Dataset-%F0%9F%A4%97%20RoboInF--4K-blue">
+        </a>
+        <a href="https://discord.gg/h8jPpwNvf" target='_blank'>
+        <img src="https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white">
+        </a>
+        <a href="./LICENSE" target='_blank'>
+        <img src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg">
+        </a>
+        <img src="https://api.infinitescript.com/badgen/count?name=SJTU-DeepVisionLab/RoboInF&ltext=Visitors&color=029C8D">
+    </h4>
+</div>
 
-## Inspect the evaluation inputs
+<strong>RoboInF evaluates instruction fidelity in simulated bimanual manipulation: from the same initial scene, different instructions ask for a different arm, destination, route, order or manipulation detail. Task success (TR) measures completion; joint success (JR) also requires satisfying every instruction constraint.</strong>
 
+<div style="width: 100%; text-align: center; margin:auto;">
+    <img style="width:100%" src="https://sjtu-deepvisionlab.github.io/RoboInF/assets/img/final_teaser.png">
+</div>
+
+For task videos, per-task checkers and full results, go check out our <a href="https://sjtu-deepvisionlab.github.io/RoboInF/" target="_blank">project page</a>.
+
+---
+</div>
+
+
+## ⭐ Update
+- [2026.11] **🔥 RoboInF v1.0.0 is released!** The evaluation runner and four policy interfaces (`pi_05`, `openwam`, `gr00t`, `lingbot-va`) are now open source.
+- [2026.11] The **RoboInF-4K** dataset is available on [Hugging Face](https://huggingface.co/datasets/JGuo666/RoboInF-4K) 🤗, and the [project page](https://sjtu-deepvisionlab.github.io/RoboInF/) is online.
+
+### ✅ TODO
+- [x] Release the evaluation runner and policy interfaces
+- [x] Release the RoboInF-4K dataset
+- [x] Release the project page
+
+
+## 🎃 Overview
+![data_collection_engine](https://sjtu-deepvisionlab.github.io/RoboInF/assets/img/final_data_collection_engine.png)
+
+RoboInF contains eight base tasks built on [RoboTwin 2.0](https://github.com/RoboTwin-Platform/RoboTwin). Each task has six to twelve instruction branches that start from the same initial scene and robot state, so a change in behavior can only come from the instruction. Task-specific checkers verify the terminal goal (TR) and use recorded trajectories, contacts and event sequences to check every instruction constraint (JR).
+
+
+## 📷 RoboInF-4K Dataset
+![dataset_overview](https://sjtu-deepvisionlab.github.io/RoboInF/assets/img/final_dataset_overview.png)
+
+RoboInF-4K pairs 4,242 expert demonstrations with simulator-grounded annotations of motion and contact. The evaluation suite has eight tasks, 115 base scenes and 861 instruction cases; the `test` and `test_random` domains reuse the same cases with clear and randomized appearance.
+
+
+## ⚙️ Installation
 Use Python 3.10 or later. Inspecting the suite does not require a GPU, a policy checkpoint or simulator assets.
 
 ```bash
@@ -14,13 +84,18 @@ cd RoboInF
 python -m pip install .
 python -m pip install huggingface_hub
 hf download JGuo666/RoboInF-4K --repo-type dataset --include 'evaluation/*' --local-dir ./RoboInF-4K
+```
+
+
+## ⚡ Evaluation
+### Inspect the evaluation inputs
+```bash
 roboinf inspect --data ./RoboInF-4K --domain test
 ```
 
-Expect eight tasks, 115 base scenes and 861 instruction cases. The `test` and `test_random` domains reuse the same cases with different appearances. The validation cases use a separate set of 115 scenes. No held-out expert recordings or case judgments are needed to run a policy.
+Expect eight tasks, 115 base scenes and 861 instruction cases. The validation cases use a separate set of 115 scenes. No held-out expert recordings or case judgments are needed to run a policy.
 
-## Run a policy
-
+### Run a policy
 Install [RoboTwin](https://github.com/RoboTwin-Platform/RoboTwin/tree/266f3aadf505a4f7fe9af0faa41a20f5f47cd123), its simulator dependencies and assets. Start a compatible inference server following the [policy guide](docs/policies.md). The four supported client interfaces are `pi_05`, `openwam`, `gr00t`, and `lingbot-va`. For a local OpenPI server on port 8000, put `{"host":"localhost","port":8000}` in `pi05.json` and run:
 
 ```bash
@@ -28,10 +103,36 @@ roboinf run --data ./RoboInF-4K --robotwin ./RoboTwin --domain val \
   --policy pi_05 --config pi05.json --limit 1 --output trial.jsonl
 ```
 
-The output records the actions executed in that rollout. See the [evaluation protocol](docs/benchmark.md) for camera and action conventions, step budgets, and how to aggregate judgments. Official held-out scoring requires an evaluator with the withheld reference information; this repository does not host a scoring service or distribute checkpoints.
+The output records the actions executed in that rollout. See the [evaluation protocol](docs/benchmark.md) for camera and action conventions, step budgets, and how to aggregate judgments.
 
-## Citation and license
+### Score judgments
+```bash
+roboinf score --data ./RoboInF-4K --domain val --judgments val-judgments.jsonl
+```
 
-Jiawei Guo, Yu Huang, Dijiang Dong, Yue Liu, Peiran Ren, and Wei Shen. *RoboInF: A Benchmark for Instruction Fidelity in Robotic Manipulation* (2026). See [CITATION.cff](CITATION.cff).
+TR uses `task_success`; JR requires both `task_success` and `instruction_success`. Official held-out scoring requires an evaluator with the withheld reference information; this repository does not host a scoring service or distribute checkpoints.
 
+
+## 📝 License
 The RoboInF authors license their contributions under [CC BY 4.0](LICENSE). Third-party components retain their original licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).
+
+
+## 📑 Citation
+If you find our work useful for your research, please consider citing our paper:
+```bibtex
+@misc{guo2026roboinf,
+  title   = {{RoboInF}: A Benchmark for Instruction Fidelity in Robotic Manipulation},
+  author  = {Guo, Jiawei and Huang, Yu and Dong, Dijiang and Liu, Yue and Ren, Peiran and Shen, Wei},
+  year    = {2026},
+  url     = {https://github.com/SJTU-DeepVisionLab/RoboInF}
+}
+```
+See also [CITATION.cff](CITATION.cff).
+
+
+## 🤝 Acknowledgement
+RoboInF is built on [RoboTwin](https://github.com/RoboTwin-Platform/RoboTwin). We thank the authors for their open-source simulator and assets.
+
+
+## 📧 Contact
+If you have any questions, please open an issue or join our [Discord](https://discord.gg/h8jPpwNvf).
