@@ -289,3 +289,6 @@ footer .credit a{color:var(--soft);text-decoration:underline;text-underline-offs
 footer .credit a:hover{color:var(--blue)}
 footer .visitors{display:block;margin-top:10px;line-height:0}
 footer .visitors img{height:20px}
+.links .lk-soon{color:var(--soft);cursor:default}
+.links .lk-soon em{font-style:normal;font:500 10.5px var(--mono);letter-spacing:.03em;color:var(--soft);border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:2px}
+.links .lk+.lk-soon:before,.links .lk-soon+.lk:before,.links .lk-soon+.lk-soon:before{content:"";width:1px;height:12px;background:var(--line);margin:0 12px}
