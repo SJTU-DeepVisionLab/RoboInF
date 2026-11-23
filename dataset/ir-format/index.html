@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IR Format | RoboInF Wiki</title>
+<meta name="description" content="Read RoboInF-4K intermediate representations: requested conditions, observed contacts, poses and keypoint traces, with a worked training example.">
+<link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script>(()=>{const t=localStorage.getItem('roboinf-theme');if(t)document.documentElement.dataset.theme=t})()</script>
+</head>
+<body>
+<header class="nav">
+  <div class="icons"><button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+  <a class="brand" href="../../"><img class="logo-light" src="../../assets/img/logo.svg" alt="RoboInF"><img class="logo-dark" src="../../assets/img/logo_dark.svg" alt="RoboInF"><span>Wiki</span></a>
+  <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search<kbd>⌘K</kbd></div>
+  <div class="icons">
+    <a href="https://github.com/SJTU-DeepVisionLab/RoboInF" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+    <button onclick="toggleTheme()" title="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</header>
+<div class="page">
+<aside class="side">
+  <a class="top" href="../../">Home</a>
+  <details><summary>RoboInF</summary>
+    <a href="../../#video">Video</a><a href="../../#overview">Abstract</a><a href="../../#engine">Data Collection Engine</a><a href="../../#dataset">RoboInF-4K Dataset</a><a href="../../#results">Leaderboard</a><a href="../../#cite">Citation</a>
+  </details>
+  <details open><summary>Tasks</summary>
+    <a class="" href="../../tasks/">Overview</a>
+    <a class="" href="../../tasks/place-bottle/"><i class="dot" style="background:#2476B8"></i>Place Bottle</a><a class="" href="../../tasks/shake-bottle/"><i class="dot" style="background:#2476B8"></i>Shake Bottle</a><a class="" href="../../tasks/orient-fan/"><i class="dot" style="background:#C68A28"></i>Orient Fan</a><a class="" href="../../tasks/select-switch/"><i class="dot" style="background:#C68A28"></i>Select Switch</a><a class="" href="../../tasks/transport-via-divider/"><i class="dot" style="background:#029C8D"></i>Transport via Divider</a><a class="" href="../../tasks/open-laptop/"><i class="dot" style="background:#029C8D"></i>Open Laptop</a><a class="" href="../../tasks/sort-blocks-in-order/"><i class="dot" style="background:#112D44"></i>Sort Blocks in Order</a><a class="" href="../../tasks/press-buttons-in-order/"><i class="dot" style="background:#112D44"></i>Press Buttons in Order</a>
+  </details>
+  <details><summary>Usage</summary>
+    <a class="" href="../../usage/install/">Install &amp; Download</a><a class="" href="../../usage/run/">Run a Policy</a><a class="" href="../../usage/policies/">Policy Interfaces</a><a class="" href="../../usage/scoring/">Predictions &amp; Scoring</a>
+  </details>
+  <details open><summary>Dataset</summary>
+    <a href="../../#dataset">RoboInF-4K Overview</a><a class="on" href="./" aria-current="page">IR Format</a><a href="../../usage/install/#download">Download</a>
+  </details>
+  <details><summary>Community</summary>
+    <a href="../../#results">Leaderboard</a><a class="soon-link" href="#" title="Coming soon">Submit Results<span class="soon-tag">soon</span></a><a class="soon-link" href="#" title="Coming soon">Common Issues<span class="soon-tag">soon</span></a>
+  </details>
+</aside>
+<main>
+  <section class="doc-head" id="top"><div class="inner">
+    <div class="crumbs"><a href="../../">RoboInF</a> / <a href="../../#dataset">Dataset</a> / IR Format</div>
+    <h1 class="title">IR Format</h1>
+    <p class="lede">How a RoboInF demonstration records what an instruction asked for and what the robot did.</p>
+    <div class="chips"><a class="chip" href="https://huggingface.co/datasets/JGuo666/RoboInF-4K">RoboInF-4K on Hugging Face</a><span class="chip">v1.0.0</span></div>
+  </div></section>
+  <section class="doc usage"><div class="inner">
+<p>The intermediate representation (IR) ties instructions to objects, regions, poses and contacts in a scene. Training and validation demonstrations include these annotations. The two test conditions provide scenes and instructions only; they do not include expert observations, trajectories or judgments.</p>
+
+<h2 id="example">A laptop demonstration</h2>
+<p>In <a href="../../tasks/open-laptop/">Open Laptop</a>, one training instruction reads: <i>“Open the laptop to 45 degrees by contacting the left region of the lid.”</i> The episode header records the requested region as <code>left</code>. Its <code>fields.scalar</code> annotation records the target angle:</p>
+<pre>{
+  "entity": "laptop",
+  "name": "target_opening_angle_deg",
+  "value": 45,
+  "unit": "degree",
+  "source": "requested"
+}</pre>
+<div class="compare ir-frames">
+  <figure><div class="frame"><img src="head-first.jpg" width="320" height="240" alt="First head-camera observation of the laptop on the table"></div><figcaption><span class="blabel">0</span><span>First observation · native JPEG</span></figcaption></figure>
+  <figure><div class="frame"><img src="head-last.png" width="320" height="240" alt="Last head-camera observation after the robot has opened the lid"></div><figcaption><span class="blabel b">135</span><span>Last observation · video-derived PNG</span></figcaption></figure>
+</div>
+<p class="legend">Frames from <a href="https://huggingface.co/datasets/JGuo666/RoboInF-4K">RoboInF-4K</a>, Jiawei Guo et al. · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+<p>The number 45 is a target, not a measurement of the final angle. Likewise, the requested contact point describes where the robot should touch. To find where and when two bodies actually touched, read the episode's <code>contacts.parquet</code> events.</p>
+
+<h2 id="fields">Annotation fields</h2>
+<p>In <code>annotations.json.gz</code>, <code>actors</code> maps the scene's numeric actor IDs to names, <code>point_ids</code> gives the order of tracked points, and <code>fields</code> holds the groups below. Only the groups relevant to the task are present.</p>
+<div class="tbl"><table class="checks"><thead><tr><th scope="col">Group</th><th scope="col">What to read</th></tr></thead><tbody>
+<tr><td><code>control_condition</code>, <code>scalar</code></td><td>A named condition or scalar value. Read its source and, for a scalar, its unit.</td></tr>
+<tr><td><code>target_region</code>, <code>contact_point</code></td><td>A region or point associated with an entity. Use the role, coordinate frame and source to interpret it.</td></tr>
+<tr><td><code>pose</code></td><td>An entity's position and orientation. Read the frame and role; quaternion components in <code>quaternion_wxyz</code> are ordered w, x, y, z.</td></tr>
+<tr><td><code>bbox</code>, <code>target_bbox</code></td><td>Image boxes for an entity and camera, in normalized x, y, width, height coordinates. A projected box can include occluded parts; visible pixel labels are in the segmentation mask.</td></tr>
+<tr><td><code>arm</code></td><td>Arm assignment and frame-indexed robot measurements, including end poses and joint actions. Requested and recorded arms can be separate fields.</td></tr>
+</tbody></table></div>
+
+<h2 id="files">Find the records</h2>
+<p>Start with <code>manifests/train.jsonl</code> or <code>manifests/val.jsonl</code>. Each row names a core tar shard and an <code>episode_id</code>. The same task, shard filename and episode directory identify the companion files.</p>
+<div class="tbl"><table class="checks"><thead><tr><th scope="col">Shard</th><th scope="col">Episode contents</th></tr></thead><tbody>
+<tr><td><code>data/</code></td><td><code>episode.json</code> holds the instruction and requested controls. <code>annotations.json.gz</code> holds the IR fields. <code>trajectory.hdf5</code> contains robot state/action, the physical clock, OpenCV calibration and keypoint traces.</td></tr>
+<tr><td><code>contacts/</code></td><td><code>contacts.parquet</code>: observed body pairs, contact positions, timestamps and frame associations. Events may occur between camera samples.</td></tr>
+<tr><td><code>masks/</code></td><td><code>segmentation.npz</code>: four camera views of integer instance or link IDs. Resolve them with this episode's <code>actors</code> map.</td></tr>
+<tr><td><code>jpeg/</code>, <code>terminal_rgb/</code></td><td>Per-camera JPEG streams with byte offsets, plus one separate PNG for the last observation in each view.</td></tr>
+</tbody></table></div>
+<p>For a 3D trace, use <code>keypoints/positions</code> in the HDF5 file together with <code>point_ids</code> and <code>keypoints/valid_mask</code>. For time, use recorded steps and timestamps with their validity flags. A demonstration with <i>N</i> camera samples has <i>N</i> − 1 transitions; the final observation has no outgoing action.</p>
+
+<h2 id="read">Read the example</h2>
+<p>From a local dataset root, this Python snippet reads the target shown above. It needs only the <code>open_laptop</code> core training shard.</p>
+<pre>import gzip
+import json
+import tarfile
+
+with tarfile.open("data/open_laptop/train-000.tar") as shard:
+    path = "episode_0000000/annotations.json.gz"
+    with gzip.open(shard.extractfile(path), "rt") as stream:
+        fields = json.load(stream)["fields"]
+
+angle = next(row for row in fields["scalar"]
+             if row["name"] == "target_opening_angle_deg")
+print(angle["value"], angle["unit"], angle["source"])</pre>
+<p>Output: <code>45 degree requested</code>.</p>
+
+    <nav class="pager"><a class="prev" href="../../#dataset"><span>← Previous</span><b>RoboInF-4K Overview</b></a><a class="next" href="../../usage/install/#download"><span>Next →</span><b>Download</b></a></nav>
+  </div></section>
+
+  <footer><div class="inner"><span>© 2026 RoboInF Team · Shanghai Jiao Tong University · Tongji University</span><span><a href="../../#cite">Cite RoboInF</a></span></div></footer>
+</main>
+<aside class="toc"><h4>On this page</h4><a href="#top">IR Format</a><a href="#example">A laptop demonstration</a><a href="#fields">Annotation fields</a><a href="#files">Find the records</a><a href="#read">Read the example</a></aside>
+</div>
+<div id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
