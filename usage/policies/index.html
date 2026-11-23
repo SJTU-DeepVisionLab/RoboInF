@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Policy Interfaces | RoboInF Wiki</title>
+<meta name="description" content="RoboInF: A Benchmark for Instruction Fidelity in Robotic Manipulation.">
+<link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script>(()=>{const t=localStorage.getItem('roboinf-theme');if(t)document.documentElement.dataset.theme=t})()</script>
+</head>
+<body>
+<header class="nav">
+  <div class="icons"><button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+  <a class="brand" href="../../"><img class="logo-light" src="../../assets/img/logo.svg" alt="RoboInF"><img class="logo-dark" src="../../assets/img/logo_dark.svg" alt="RoboInF"><span>Wiki</span></a>
+  <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search<kbd>⌘K</kbd></div>
+  <div class="icons">
+    <a href="https://github.com/SJTU-DeepVisionLab/RoboInF" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+    <button onclick="toggleTheme()" title="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</header>
+<div class="page">
+<aside class="side">
+  <a class="top" href="../../">Home</a>
+  <details><summary>RoboInF</summary>
+    <a href="../../#video">Video</a><a href="../../#overview">Abstract</a><a href="../../#engine">Data Collection Engine</a><a href="../../#dataset">RoboInF-4K Dataset</a><a href="../../#results">Leaderboard</a><a href="../../#cite">Citation</a>
+  </details>
+  <details open><summary>Tasks</summary>
+    <a class="" href="../../tasks/">Overview</a>
+    <a class="" href="../../tasks/place-bottle/"><i class="dot" style="background:#2476B8"></i>Place Bottle</a><a class="" href="../../tasks/shake-bottle/"><i class="dot" style="background:#2476B8"></i>Shake Bottle</a><a class="" href="../../tasks/orient-fan/"><i class="dot" style="background:#C68A28"></i>Orient Fan</a><a class="" href="../../tasks/select-switch/"><i class="dot" style="background:#C68A28"></i>Select Switch</a><a class="" href="../../tasks/transport-via-divider/"><i class="dot" style="background:#029C8D"></i>Transport via Divider</a><a class="" href="../../tasks/open-laptop/"><i class="dot" style="background:#029C8D"></i>Open Laptop</a><a class="" href="../../tasks/sort-blocks-in-order/"><i class="dot" style="background:#112D44"></i>Sort Blocks in Order</a><a class="" href="../../tasks/press-buttons-in-order/"><i class="dot" style="background:#112D44"></i>Press Buttons in Order</a>
+  </details>
+  <details open><summary>Usage</summary>
+    <a class="" href="../../usage/install/">Install &amp; Download</a><a class="" href="../../usage/run/">Run a Policy</a><a class=" on" href="../../usage/policies/">Policy Interfaces</a><a class="" href="../../usage/scoring/">Predictions &amp; Scoring</a>
+  </details>
+  <details><summary>Dataset</summary>
+    <a href="../../#dataset">RoboInF-4K Overview</a><a class="soon-link" href="#" title="Coming soon">IR Format<span class="soon-tag">soon</span></a><a href="../../usage/install/#download">Download</a>
+  </details>
+  <details><summary>Community</summary>
+    <a href="../../#results">Leaderboard</a><a class="soon-link" href="#" title="Coming soon">Submit Results<span class="soon-tag">soon</span></a><a class="soon-link" href="#" title="Coming soon">Common Issues<span class="soon-tag">soon</span></a>
+  </details>
+</aside>
+<main>
+  <section class="doc-head" id="top"><div class="inner">
+    <div class="crumbs"><a href="../../">RoboInF</a> / Usage / Policy Interfaces</div>
+    <h1 class="title">Policy Interfaces</h1>
+    <p class="lede">Connect π0.5, OpenWAM, GR00T or LingBot-VA through their upstream inference servers.</p>
+    <div class="chips"><a class="chip" href="https://github.com/SJTU-DeepVisionLab/RoboInF" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg> SJTU-DeepVisionLab/RoboInF</a><span class="chip">v1.0.0</span></div>
+  </div></section>
+  <section class="doc usage"><div class="inner">
+<p>Run the checkpoint in its upstream inference server and install the matching client in the environment that runs RoboInF. Each adapter receives only the instruction, the current camera images and the robot state; the server is responsible for checkpoint-specific preprocessing, normalization and inference. Importing the benchmark itself does not require any of these clients.</p>
+
+<h2 id="supported">Supported policies</h2>
+<div class="tbl"><table class="checks">
+<tr><th>Policy ID</th><th>Upstream client</th><th>Robot action</th><th class="n">Default port</th></tr>
+<tr><td><code>pi_05</code></td><td><a href="https://github.com/Physical-Intelligence/openpi" target="_blank" rel="noopener">OpenPI</a>, <code>openpi_client.websocket_client_policy.WebsocketClientPolicy</code></td><td>Absolute joint positions, 14 values per step</td><td class="n">8000</td></tr>
+<tr><td><code>openwam</code></td><td><a href="https://github.com/OpenWAM-Official/OpenWAM/blob/1dcaeea76501f2431286b511284a671778645996/benchmarks/robotwin/openwam2robotwin_interface.py" target="_blank" rel="noopener">OpenWAM RoboTwin ModelClient</a></td><td>End-effector pose and gripper for each arm, or 14 joint values</td><td class="n">8848</td></tr>
+<tr><td><code>gr00t</code></td><td><a href="https://github.com/NVIDIA/Isaac-GR00T" target="_blank" rel="noopener">Isaac-GR00T</a>, <code>gr00t.policy.server_client.PolicyClient</code></td><td>Absolute joint targets from two seven-value arm groups</td><td class="n">5555</td></tr>
+<tr><td><code>lingbot-va</code></td><td><a href="https://github.com/Robbyant/lingbot-va/tree/main/evaluation/robotwin" target="_blank" rel="noopener">LingBot-VA RoboTwin client</a>, <code>evaluation.robotwin.websocket_client_policy.WebsocketClientPolicy</code></td><td>End-effector poses from the 16-channel RoboTwin checkpoint</td><td class="n">10001</td></tr>
+</table></div>
+
+<h2 id="config">Configuration file</h2>
+<p>The <code>--config</code> file is a JSON object with the address at which you started the upstream server. Unknown fields are rejected.</p>
+<div class="tbl"><table class="checks">
+<tr><th>Field</th><th>Policies</th><th>Values</th></tr>
+<tr><td><code>host</code></td><td>all</td><td>Hostname without URL scheme or credentials (default <code>localhost</code>)</td></tr>
+<tr><td><code>port</code></td><td>all</td><td>Port of the upstream server (defaults above)</td></tr>
+<tr><td><code>action_mode</code></td><td><code>openwam</code></td><td><code>"ee"</code> (default) or <code>"qpos"</code>; must match the checkpoint</td></tr>
+<tr><td><code>eef_layout</code></td><td><code>openwam</code>, <code>ee</code> mode only</td><td><code>"physical"</code> (default) or <code>"legacy_wxyz_values_as_xyzw"</code></td></tr>
+</table></div>
+<pre>{"host": "localhost", "port": 8000}</pre>
+<p class="callout">The OpenWAM and LingBot-VA clients import code under <code>benchmarks/</code> and <code>evaluation/</code> respectively: put the corresponding <b>upstream repository root</b> on the client Python path. Use one active rollout per server, and configure the sampling seed in the model service if it is supported — these remote calls do not promise a per-episode RNG reset.</p>
+
+<h2 id="pi05">π<sub>0.5</sub> (<code>pi_05</code>)</h2>
+<p>Serve a checkpoint with OpenPI's ALOHA input transform. The adapter sends CHW RGB images as <code>cam_high</code>, <code>cam_left_wrist</code> and <code>cam_right_wrist</code>, the 14-value joint state and the original prompt. The server must return <code>actions</code> shaped <code>[50,14]</code> after its output transform; the runner executes the permitted prefix of the chunk. Deployments returning padded or delta actions need the matching OpenPI output transform.</p>
+
+<h2 id="openwam">OpenWAM (<code>openwam</code>)</h2>
+<p>Match <code>action_mode</code> to the checkpoint. The upstream client sends one action per request and manages its own action queue. For end-effector models, both proprioception and returned actions use the upstream rotation conversion. The default <code>"eef_layout":"physical"</code> converts simulator <code>wxyz</code> quaternions into the client's <code>xyzw</code> order and back. Choose <code>"legacy_wxyz_values_as_xyzw"</code> only for checkpoints trained by treating the original <code>wxyz</code> component values as <code>xyzw</code>.</p>
+
+<h2 id="gr00t">GR00T (<code>gr00t</code>)</h2>
+<p>Use the N1.7-style native policy API with a compatible bimanual modality configuration:</p>
+<ul class="list">
+<li>camera keys <code>front</code>, <code>left_wrist</code>, <code>right_wrist</code> (the first is the benchmark's head camera);</li>
+<li>state/action groups <code>left_arm</code> and <code>right_arm</code>, each six joints plus gripper;</li>
+<li>language key <code>annotation.human.task_description</code>.</li>
+</ul>
+<p>Images are batched as <code>[1,1,H,W,3]</code> and state as <code>[1,1,7]</code>. The server must return decoded absolute targets shaped <code>[1,horizon,7]</code> per group. A different embodiment requires a compatible server-side modality configuration.</p>
+
+<h2 id="lingbot">LingBot-VA (<code>lingbot-va</code>)</h2>
+<p>Use the upstream <a href="https://huggingface.co/robbyant/lingbot-va-posttrain-robotwin" target="_blank" rel="noopener">RoboTwin checkpoint</a>. The adapter requests native action blocks, skips the initial conditioning frame, composes relative poses with the measured episode-start pose, and supplies one absolute action per call. To match the checkpoint's relative-pose encoding it composes the stored four components exactly as the upstream RoboTwin client does (SciPy <code>xyzw</code> multiplication on the stored values). When a block has finished, quarter-frame RGB observations and that block update the model's KV cache. This interface expects the 16-channel RoboTwin output, not a 30-channel joint checkpoint.</p>
+
+<p class="legend">The adapter tests use synthetic observations and deterministic replies to check camera layout, channel grouping, quaternion ordering and cache timing. They do not run the four checkpoints or reproduce leaderboard scores.</p>
+
+    <nav class="pager"><a class="prev" href="../run/"><span>← Previous</span><b>Run a Policy</b></a><a class="next" href="../scoring/"><span>Next →</span><b>Predictions &amp; Scoring</b></a></nav>
+  </div></section>
+
+  <footer><div class="inner"><span>© 2026 RoboInF Team · Shanghai Jiao Tong University · Tongji University</span><span><a href="../../#cite">Cite RoboInF</a></span></div></footer>
+</main>
+<aside class="toc"><h4>On this page</h4><a href="#top">Policy Interfaces</a><a href="#supported">Supported policies</a><a href="#config">Configuration file</a><a href="#pi05">π0.5 (pi_05)</a><a href="#openwam">OpenWAM (openwam)</a><a href="#gr00t">GR00T (gr00t)</a><a href="#lingbot">LingBot-VA (lingbot-va)</a></aside>
+</div>
+<div id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

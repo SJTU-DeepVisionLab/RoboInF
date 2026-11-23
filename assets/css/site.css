@@ -292,3 +292,22 @@ footer .visitors img{height:20px}
 .links .lk-soon{color:var(--soft);cursor:default}
 .links .lk-soon em{font-style:normal;font:500 10.5px var(--mono);letter-spacing:.03em;color:var(--soft);border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:2px}
 .links .lk+.lk-soon:before,.links .lk-soon+.lk:before,.links .lk-soon+.lk-soon:before{content:"";width:1px;height:12px;background:var(--line);margin:0 12px}
+
+/* usage pages */
+.usage h2{scroll-margin-top:80px}
+.usage .n,.usage th.n{text-align:right;font-variant-numeric:tabular-nums}
+.usage .tbl{margin:12px 0 16px}
+.usage .tbl td,.usage .tbl th{white-space:normal;text-align:left}
+.usage .info th{width:10rem}
+.list{margin:6px 0 14px;padding-left:1.2em}.list li{margin:4px 0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.steps a{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font-size:14px;font-weight:500}
+.steps a:hover{text-decoration:none;border-color:var(--teal)}
+.steps b{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-size:13px}
+.doc pre{position:relative;margin:10px 0 16px}
+.pre-copy{position:absolute;right:8px;top:8px;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:6px;font:500 11.5px var(--ui);padding:2px 8px;cursor:pointer;opacity:0;transition:opacity .15s}
+.doc pre:hover .pre-copy{opacity:1}
+a.chip{color:var(--text)}a.chip:hover{text-decoration:none;border-color:var(--blue)}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+.usage .tbl td.n,.usage .tbl th.n{text-align:right}
+.usage .tbl td:first-child code{white-space:nowrap}

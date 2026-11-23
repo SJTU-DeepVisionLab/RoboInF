@@ -83,3 +83,12 @@
     Promise.all(vids.map(v => v.play().catch(() => {})));
   }));
 })();
+
+/* copy buttons on code blocks in doc pages */
+document.querySelectorAll('.doc pre').forEach(pre => {
+  const text = pre.textContent.trim();
+  const b = document.createElement('button');
+  b.className = 'pre-copy'; b.textContent = 'Copy';
+  b.onclick = () => { navigator.clipboard.writeText(text); b.textContent = 'Copied'; setTimeout(() => (b.textContent = 'Copy'), 1400); };
+  pre.appendChild(b);
+});

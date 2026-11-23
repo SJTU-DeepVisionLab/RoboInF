@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Predictions &amp; Scoring | RoboInF Wiki</title>
+<meta name="description" content="RoboInF: A Benchmark for Instruction Fidelity in Robotic Manipulation.">
+<link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script>(()=>{const t=localStorage.getItem('roboinf-theme');if(t)document.documentElement.dataset.theme=t})()</script>
+</head>
+<body>
+<header class="nav">
+  <div class="icons"><button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+  <a class="brand" href="../../"><img class="logo-light" src="../../assets/img/logo.svg" alt="RoboInF"><img class="logo-dark" src="../../assets/img/logo_dark.svg" alt="RoboInF"><span>Wiki</span></a>
+  <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search<kbd>⌘K</kbd></div>
+  <div class="icons">
+    <a href="https://github.com/SJTU-DeepVisionLab/RoboInF" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+    <button onclick="toggleTheme()" title="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</header>
+<div class="page">
+<aside class="side">
+  <a class="top" href="../../">Home</a>
+  <details><summary>RoboInF</summary>
+    <a href="../../#video">Video</a><a href="../../#overview">Abstract</a><a href="../../#engine">Data Collection Engine</a><a href="../../#dataset">RoboInF-4K Dataset</a><a href="../../#results">Leaderboard</a><a href="../../#cite">Citation</a>
+  </details>
+  <details open><summary>Tasks</summary>
+    <a class="" href="../../tasks/">Overview</a>
+    <a class="" href="../../tasks/place-bottle/"><i class="dot" style="background:#2476B8"></i>Place Bottle</a><a class="" href="../../tasks/shake-bottle/"><i class="dot" style="background:#2476B8"></i>Shake Bottle</a><a class="" href="../../tasks/orient-fan/"><i class="dot" style="background:#C68A28"></i>Orient Fan</a><a class="" href="../../tasks/select-switch/"><i class="dot" style="background:#C68A28"></i>Select Switch</a><a class="" href="../../tasks/transport-via-divider/"><i class="dot" style="background:#029C8D"></i>Transport via Divider</a><a class="" href="../../tasks/open-laptop/"><i class="dot" style="background:#029C8D"></i>Open Laptop</a><a class="" href="../../tasks/sort-blocks-in-order/"><i class="dot" style="background:#112D44"></i>Sort Blocks in Order</a><a class="" href="../../tasks/press-buttons-in-order/"><i class="dot" style="background:#112D44"></i>Press Buttons in Order</a>
+  </details>
+  <details open><summary>Usage</summary>
+    <a class="" href="../../usage/install/">Install &amp; Download</a><a class="" href="../../usage/run/">Run a Policy</a><a class="" href="../../usage/policies/">Policy Interfaces</a><a class=" on" href="../../usage/scoring/">Predictions &amp; Scoring</a>
+  </details>
+  <details><summary>Dataset</summary>
+    <a href="../../#dataset">RoboInF-4K Overview</a><a class="soon-link" href="#" title="Coming soon">IR Format<span class="soon-tag">soon</span></a><a href="../../usage/install/#download">Download</a>
+  </details>
+  <details><summary>Community</summary>
+    <a href="../../#results">Leaderboard</a><a class="soon-link" href="#" title="Coming soon">Submit Results<span class="soon-tag">soon</span></a><a class="soon-link" href="#" title="Coming soon">Common Issues<span class="soon-tag">soon</span></a>
+  </details>
+</aside>
+<main>
+  <section class="doc-head" id="top"><div class="inner">
+    <div class="crumbs"><a href="../../">RoboInF</a> / Usage / Predictions &amp; Scoring</div>
+    <h1 class="title">Predictions &amp; Scoring</h1>
+    <p class="lede">From executed actions to checker judgments and TR / JR.</p>
+    <div class="chips"><a class="chip" href="https://github.com/SJTU-DeepVisionLab/RoboInF" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg> SJTU-DeepVisionLab/RoboInF</a><span class="chip">v1.0.0</span></div>
+  </div></section>
+  <section class="doc usage"><div class="inner">
+<p>A run produces <b>predictions</b> (the executed actions). A checker turns each rollout into a <b>judgment</b>, and <code>roboinf score</code> aggregates judgments into TR and JR.</p>
+
+<h2 id="predictions">Predictions</h2>
+<p><code>roboinf run</code> writes one JSONL row per completed case with these fields:</p>
+<div class="tbl"><table class="checks">
+<tr><th>Field</th><th>Content</th></tr>
+<tr><td><code>case_id</code>, <code>task</code>, <code>domain</code></td><td>Which case was evaluated, and under which domain</td></tr>
+<tr><td><code>policy</code>, <code>policy_seed</code></td><td>Policy interface and the fixed policy RNG seed</td></tr>
+<tr><td><code>action_spec</code></td><td><code>joint14_absolute</code> or <code>eef16_absolute_wxyz</code></td></tr>
+<tr><td><code>action_count</code>, <code>actions</code></td><td>Number of actions and the ordered list of <b>executed</b> actions</td></tr>
+</table></div>
+<p class="callout">A one-case installation check is not a full benchmark result.</p>
+
+<h2 id="judgments">Judgments</h2>
+<p>Official judgments require replay or equivalent simulator evidence for the policy's own rollout. Expert demonstration labels must never be reused to score a new policy. A checker export has exactly these fields per case (illustrative values):</p>
+<pre>{"case_id":"example","domain":"val","task_success":true,"instruction_success":false}</pre>
+<p>The task-specific checker conditions behind <code>task_success</code> and <code>instruction_success</code> are listed on each <a href="../../tasks/">task page</a> under “Fidelity checker”.</p>
+
+<h2 id="score">Score</h2>
+<pre>roboinf score --data ./RoboInF-4K --domain val --judgments val-judgments.jsonl</pre>
+<p>The command prints per-task <code>cases</code>, <code>TR</code> and <code>JR</code>, and the benchmark averages <code>macro_TR</code> and <code>macro_JR</code>.</p>
+<div class="rule"><div><b>Task success (TR)</b><code>task_success</code> is true.</div><div><b>Joint success (JR)</b>Both <code>task_success</code> and <code>instruction_success</code> are true.</div></div>
+<ul class="list" style="margin-top:14px">
+<li>A task's rate is the fraction of successful cases. The benchmark average gives equal weight to each of the eight tasks, separately for validation, clear test and appearance-randomized test.</li>
+<li>Exactly one judgment per case is required. Unknown, duplicate and missing cases are rejected rather than changing the denominator, so dropouts and infrastructure errors must be resolved first.</li>
+<li>The command aggregates evaluator judgments; it does not infer physical success from action arrays.</li>
+</ul>
+
+<h2 id="test">Held-out test</h2>
+<p>The hidden test checker and the individual official test judgments are not distributed, and the repository does not host a scoring service. Comparisons with paper results additionally require matching simulator dependencies, assets, dynamics, rendering and policy settings; matching the scene seed alone does not verify the full initial state.</p>
+
+    <nav class="pager"><a class="prev" href="../policies/"><span>← Previous</span><b>Policy Interfaces</b></a></nav>
+  </div></section>
+
+  <footer><div class="inner"><span>© 2026 RoboInF Team · Shanghai Jiao Tong University · Tongji University</span><span><a href="../../#cite">Cite RoboInF</a></span></div></footer>
+</main>
+<aside class="toc"><h4>On this page</h4><a href="#top">Predictions &amp; Scoring</a><a href="#predictions">Predictions</a><a href="#judgments">Judgments</a><a href="#score">Score</a><a href="#test">Held-out test</a></aside>
+</div>
+<div id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
