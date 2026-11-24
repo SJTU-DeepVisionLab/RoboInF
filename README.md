@@ -28,6 +28,9 @@
         <a href="https://sjtu-deepvisionlab.github.io/RoboInF/" target='_blank'>
         <img src="https://img.shields.io/badge/🤖-Project%20Page-029C8D">
         </a>
+        <a href="https://arxiv.org/abs/2611.30555" target='_blank'>
+        <img src="https://img.shields.io/badge/arXiv-2611.30555-b31b1b.svg">
+        </a>
         <a href="https://www.alphaxiv.org/abs/2611.roboinf" target='_blank'>
         <img src="https://img.shields.io/badge/alphaXiv-2611.roboinf-b31b1b.svg">
         </a>
@@ -123,11 +126,11 @@ The RoboInF authors license their contributions under [CC BY 4.0](LICENSE). Thir
 ## 📑 Citation
 If you find our work useful for your research, please consider citing our paper:
 ```bibtex
-@misc{guo2026roboinf,
+@article{guo2026roboinf,
   title   = {{RoboInF}: A Benchmark for Instruction Fidelity in Robotic Manipulation},
   author  = {Guo, Jiawei and Huang, Yu and Dong, Dijiang and Liu, Yue and Ren, Peiran and Shen, Wei},
-  year    = {2026},
-  url     = {https://github.com/SJTU-DeepVisionLab/RoboInF}
+  journal = {arXiv preprint arXiv:2611.30555},
+  year    = {2026}
 }
 ```
 See also [CITATION.cff](CITATION.cff).
