@@ -28,6 +28,9 @@
         <a href="https://sjtu-deepvisionlab.github.io/RoboInF/" target='_blank'>
         <img src="https://img.shields.io/badge/🤖-Project%20Page-029C8D">
         </a>
+        <a href="https://www.alphaxiv.org/abs/2611.roboinf" target='_blank'>
+        <img src="https://img.shields.io/badge/alphaXiv-2611.roboinf-b31b1b.svg">
+        </a>
         <a href="https://huggingface.co/datasets/JGuo666/RoboInF-4K" target='_blank'>
         <img src="https://img.shields.io/badge/Dataset-%F0%9F%A4%97%20RoboInF--4K-blue">
         </a>
