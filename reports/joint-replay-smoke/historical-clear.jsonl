@@ -3,3 +3,6 @@
 {"task": "press_buttons", "case_id": "c0be0f44436c4f956f241a75", "domain": "test", "task_success": true, "instruction_success": false, "prediction_sha256": "9ac037799800d48d372798943ed6e8f3fe0a3f4bc0ae557dce88c660704708b1"}
 {"task": "stack_blocks", "case_id": "7b465c5b79d1f9b01275cca0", "domain": "test", "task_success": true, "instruction_success": true, "prediction_sha256": "5f0818a7d1a38cc34b902e241cffe14ab598a238b776494f89b367f5a984feac"}
 {"task": "turn_switch", "case_id": "8ea0fbec8f12c5b8f33d7067", "domain": "test", "task_success": true, "instruction_success": false, "prediction_sha256": "f8133175124fd47555af8a6fcafa51be61dddfc8f833c456882265c24c94208a"}
+{"task":"open_laptop","case_id":"82af204ac8508567822a2a1a","domain":"test","task_success":true,"instruction_success":true,"prediction_sha256":"71aedca2b36250afd0148198baabae733ee0fb1f8fbfd2b740c66b6aec13f7cc"}
+{"task":"place_via_divider","case_id":"211ada37e748c0248f2ef7db","domain":"test","task_success":true,"instruction_success":true,"prediction_sha256":"3b4fc8853b5a5d8c0348a2f71af5f147b75deeb55b8584ac821a0dba6dc1bd44"}
+{"task":"shake_bottle","case_id":"d5137c5f1cf4d974fb7f33b4","domain":"test","task_success":true,"instruction_success":false,"prediction_sha256":"7f4fd5d3fbf02523bcbc9a26086e4733b6cdcffdb8d220657ee4bea8ad37f3bb"}

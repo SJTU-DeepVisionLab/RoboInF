@@ -33,10 +33,10 @@ For evidence containing the rollout's own `case_id` and `domain`, run
 JSONL judgment for `roboinf score`. Concatenate one row per case in the domain.
 Without `--judgment`, the command still returns detailed diagnostics.
 
-### Prediction replay (partial)
+### Joint-action prediction replay
 
-For a one-case `joint14_absolute` prediction from Place Bottle, Orient Fan,
-Select Switch, Press Buttons in Order, or Sort Blocks in Order, the replay command
+For a one-case `joint14_absolute` prediction from any of the eight tasks in
+`test` or `test_random`, the replay command
 loads the released case and scene, measures contacts on each physics step, and
 prints a judgment bound to the SHA-256 of the prediction file:
 

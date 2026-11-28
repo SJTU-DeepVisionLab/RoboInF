@@ -17,6 +17,9 @@ from . import judgment_record
 from .spec import PROTOCOL, TASKS, task_name
 from .switch_recorder import SwitchRecorder
 from .sort_recorder import SortRecorder
+from .divider_recorder import DividerRecorder
+from .laptop_recorder import LaptopRecorder
+from .shake_recorder import ShakeRecorder
 
 
 class ContactRecorder:
@@ -50,13 +53,20 @@ class ContactRecorder:
         )
 
     def evidence(self, checks):
-        return {"native_final": {"checks": checks}, "samples": self.samples,
-                "control_spec": {"active_arm": self.arm}, "dt": self.episode.dt}
+        return {
+            "native_final": {"checks": checks},
+            "samples": self.samples,
+            "control_spec": {"active_arm": self.arm},
+            "dt": self.episode.dt,
+        }
 
 
 class BottleRecorder(ContactRecorder):
     def __init__(self, episode, instruction):
-        match = re.fullmatch(r"Move (bottle_(?:left|right)) to (goal_(?:left|right)) using the (left|right) arm\.", instruction)
+        match = re.fullmatch(
+            r"Move (bottle_(?:left|right)) to (goal_(?:left|right)) using the (left|right) arm\.",
+            instruction,
+        )
         if not match:
             raise ValueError("Unknown Place Bottle instruction")
         target, self.goal, arm = match.groups()
@@ -64,7 +74,10 @@ class BottleRecorder(ContactRecorder):
         self.initial_z = {name: self.center(name)[2] for name in episode.env.objects}
 
     def center(self, name):
-        return np.asarray(self.episode.env.objects[name].get_functional_point(0, "pose").p, dtype=np.float64)
+        return np.asarray(
+            self.episode.env.objects[name].get_functional_point(0, "pose").p,
+            dtype=np.float64,
+        )
 
     def finish(self):
         env = self.episode.env
@@ -87,10 +100,22 @@ class BottleRecorder(ContactRecorder):
 
 
 class FanRecorder(ContactRecorder):
-    DIRECTIONS = ("front", "front right", "right", "back right", "back", "back left", "left", "front left")
+    DIRECTIONS = (
+        "front",
+        "front right",
+        "right",
+        "back right",
+        "back",
+        "back left",
+        "left",
+        "front left",
+    )
 
     def __init__(self, episode, instruction):
-        match = re.fullmatch(r"Use the (left|right) arm to place the fan facing ([a-z ]+) on the pad\.", instruction)
+        match = re.fullmatch(
+            r"Use the (left|right) arm to place the fan facing ([a-z ]+) on the pad\.",
+            instruction,
+        )
         if not match or match[2] not in self.DIRECTIONS:
             raise ValueError("Unknown Orient Fan instruction")
         super().__init__(episode, episode.env.fan.get_name(), match[1])
@@ -106,18 +131,29 @@ class FanRecorder(ContactRecorder):
         x, y = rotation[:2, 2]
         heading = np.rad2deg(np.arctan2(x, y))
         error = abs((heading - self.heading + 180) % 360 - 180)
-        return self.evidence({
-            "position": bool(np.all(np.abs(pose.p - self.pad) < 0.04)),
-            "orientation": bool(np.hypot(x, y) > 1e-8 and error <= 10),
-            "upright": bool(np.rad2deg(np.arccos(np.clip(rotation[2, 1], -1, 1))) <= 10),
-            "left_gripper_open": bool(env.robot.is_left_gripper_open()),
-            "right_gripper_open": bool(env.robot.is_right_gripper_open()),
-        })
+        return self.evidence(
+            {
+                "position": bool(np.all(np.abs(pose.p - self.pad) < 0.04)),
+                "orientation": bool(np.hypot(x, y) > 1e-8 and error <= 10),
+                "upright": bool(
+                    np.rad2deg(np.arccos(np.clip(rotation[2, 1], -1, 1))) <= 10
+                ),
+                "left_gripper_open": bool(env.robot.is_left_gripper_open()),
+                "right_gripper_open": bool(env.robot.is_right_gripper_open()),
+            }
+        )
 
 
-RECORDERS = {"place_bottle": BottleRecorder, "place_fan": FanRecorder,
-             "turn_switch": SwitchRecorder, "press_buttons": SwitchRecorder,
-             "stack_blocks": SortRecorder}
+RECORDERS = {
+    "place_bottle": BottleRecorder,
+    "place_fan": FanRecorder,
+    "turn_switch": SwitchRecorder,
+    "press_buttons": SwitchRecorder,
+    "stack_blocks": SortRecorder,
+    "open_laptop": LaptopRecorder,
+    "place_via_divider": DividerRecorder,
+    "shake_bottle": ShakeRecorder,
+}
 
 
 def replay(raw, data, robotwin):
@@ -149,6 +185,7 @@ def replay(raw, data, robotwin):
             if episode.action_steps != index + 1 or episode.physics_steps <= previous:
                 raise RuntimeError("Replay clock did not advance")
         previous = episode.physics_steps
+        recorder.passive = True
         episode.settle(250)
         if (
             episode.physics_steps != previous + 250
