@@ -1,5 +1,21 @@
 # Policy interfaces
 
+### RoboInF GR00T checkpoint
+
+The [C2C 30K release](https://huggingface.co/JGuo666/GR00T-N1.7-RoboInF-C2C-30K)
+uses separate left/right arm and gripper modalities. With a locally provisioned
+checkpoint and the matching [Isaac-GR00T code](https://github.com/NVIDIA/Isaac-GR00T/tree/708617f5716c63fc0a327391492ea2b91977ae90), run:
+
+```bash
+python examples/groot/serve.py --checkpoint /path/to/checkpoint --port 5555 --seed 0
+```
+
+Use `--policy gr00t` with `{"host":"127.0.0.1","port":5555}` in the simulator
+environment. Use one active episode per server. The server maps the release
+client's front view and two seven-value arm groups to the checkpoint's head
+camera and four native joint/gripper groups. The model card tracks availability;
+the server does not download missing weights or perform scoring.
+
 Run the checkpoint in its upstream inference server and install the matching
 client in the environment running RoboInF. Each adapter receives only the
 instruction, current camera images and robot state. The server is responsible

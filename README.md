@@ -116,7 +116,11 @@ The output records the actions executed in that rollout. See the [evaluation pro
 roboinf score --data ./RoboInF-4K --domain val --judgments val-judgments.jsonl
 ```
 
-TR uses `task_success`; JR requires both `task_success` and `instruction_success`. Official held-out scoring requires an evaluator with the withheld reference information; this repository does not host a scoring service or distribute checkpoints.
+TR uses `task_success`; JR requires both `task_success` and `instruction_success`.
+The [physics checker](docs/physics-checker.md) evaluates measured trajectory evidence.
+`roboinf score` aggregates judgments; neither command assigns a score directly to an action file.
+See the [GR00T model card](https://huggingface.co/JGuo666/GR00T-N1.7-RoboInF-C2C-30K)
+for checkpoint release status.
 
 
 ## 📝 License

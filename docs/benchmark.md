@@ -47,7 +47,7 @@ The runner executes at most 20 actions from each predicted chunk, or fewer if th
 
 A predictions JSONL file contains one row per completed case. Each row records the case ID, task, domain, policy, policy seed, action specification, action count and the ordered list of **executed** actions. A one-case installation check is not a full benchmark result.
 
-Official judgments require replay or equivalent simulator evidence for the policy's own rollout. Expert demonstration labels must never be reused to score a new policy. The public aggregation command consumes judgments produced by an evaluator; it does not infer physical success from action arrays. The hidden test checker and individual official test judgments are not distributed.
+Official judgments require replay or equivalent simulator evidence for the policy's own rollout. Expert demonstration labels must never be reused to score a new policy. The [physics checker](physics-checker.md) scores measured evidence. The public aggregation command consumes judgments produced by an evaluator; it does not infer physical success from action arrays.
 
 A checker export has exactly these fields per case (illustrative values):
 
