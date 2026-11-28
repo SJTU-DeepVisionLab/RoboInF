@@ -49,6 +49,7 @@ class _SceneClock:
     def __init__(self, scene):
         self.scene = scene
         self.count = 0
+        self.on_step = None
 
     def __getattr__(self, name):
         return getattr(self.scene, name)
@@ -56,6 +57,8 @@ class _SceneClock:
     def step(self):
         result = self.scene.step()
         self.count += 1
+        if self.on_step is not None:
+            self.on_step(self.count)
         return result
 
 

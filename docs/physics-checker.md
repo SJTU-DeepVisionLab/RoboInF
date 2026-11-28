@@ -32,3 +32,18 @@ For evidence containing the rollout's own `case_id` and `domain`, run
 `python -m roboinf_benchmark.checker --judgment evidence.json` to emit one
 JSONL judgment for `roboinf score`. Concatenate one row per case in the domain.
 Without `--judgment`, the command still returns detailed diagnostics.
+
+### Prediction replay (partial)
+
+For a one-case `joint14_absolute` Place Bottle prediction, the replay command
+loads the released case and scene, measures contacts on each physics step, and
+prints a judgment bound to the SHA-256 of the prediction file:
+
+```sh
+python -m roboinf_benchmark.checker.replay --data ./RoboInF-4K \
+  --robotwin ./RoboTwin prediction.jsonl
+```
+
+Unsupported tasks and incomplete trajectories raise errors, not failed policy
+judgments. This path has been checked against a historical clear receipt; it
+is not yet a validated replay evaluator for the full benchmark.
