@@ -49,7 +49,7 @@
   </div></section>
   <section class="doc usage"><div class="inner">
 <h2 id="robotwin">Set up RoboTwin</h2>
-<p>Install RoboTwin following the <a href="https://github.com/RoboTwin-Platform/RoboTwin" target="_blank" rel="noopener">RoboTwin installation and asset instructions</a>, in the same environment that runs the benchmark, together with the simulator and the CuRobo planner. Obtain the assets separately under the terms of their providers.</p>
+<p>Use the <a href="https://github.com/SJTU-DeepVisionLab/RoboInF/tree/main/third_party/robotwin">RoboTwin source bundled with RoboInF</a>. The runner checks the simulator files against the release hashes. Install the simulator dependencies and CuRobo planner separately, and obtain assets under their providers' terms.</p>
 <div class="tbl info"><table>
 <tr><th>Tested setup</th><td><a href="https://github.com/RoboTwin-Platform/RoboTwin/tree/266f3aadf505a4f7fe9af0faa41a20f5f47cd123" target="_blank" rel="noopener">RoboTwin revision <code>266f3aa</code></a> · MPLib 0.2.1 · NumPy 1.26.4 · Python 3.10</td></tr>
 <tr><th>Expected layout</th><td>RoboTwin 2 source tree with <code>envs/_base_task.py</code>, <code>env_cfg/task_config/demo_clean.yml</code>, the Aloha-AgileX embodiment and its expanded planner configuration</td></tr>

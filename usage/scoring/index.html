@@ -67,6 +67,7 @@
 <p>The task-specific checker conditions behind <code>task_success</code> and <code>instruction_success</code> are listed on each <a href="../../tasks/">task page</a> under “Fidelity checker”.</p>
 
 <h2 id="score">Score</h2>
+<p>For recorded physics evidence with a case ID and domain, export one row per case with <code>python -m roboinf_benchmark.checker --judgment evidence.json</code>. Combine the rows before scoring.</p>
 <pre>roboinf score --data ./RoboInF-4K --domain val --judgments val-judgments.jsonl</pre>
 <p>The command prints per-task <code>cases</code>, <code>TR</code> and <code>JR</code>, and the benchmark averages <code>macro_TR</code> and <code>macro_JR</code>.</p>
 <div class="rule"><div><b>Task success (TR)</b><code>task_success</code> is true.</div><div><b>Joint success (JR)</b>Both <code>task_success</code> and <code>instruction_success</code> are true.</div></div>
