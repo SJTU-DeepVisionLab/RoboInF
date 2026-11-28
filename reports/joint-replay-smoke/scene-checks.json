@@ -1,0 +1,98 @@
+[
+  {
+    "task": "open_laptop",
+    "case_id": "4ae8cb77cb9e02035a0df602",
+    "domain": "test",
+    "exit": 0
+  },
+  {
+    "task": "place_bottle",
+    "case_id": "442513135eb12ff5e7cef319",
+    "domain": "test",
+    "exit": 0
+  },
+  {
+    "task": "place_fan",
+    "case_id": "7c1da3be698a68d18779ebd4",
+    "domain": "test",
+    "exit": 0
+  },
+  {
+    "task": "place_via_divider",
+    "case_id": "fc75a98682ce62892779b804",
+    "domain": "test",
+    "exit": 0
+  },
+  {
+    "task": "press_buttons",
+    "case_id": "d0bb1c22b1e9b017093ac7ad",
+    "domain": "test",
+    "exit": 0
+  },
+  {
+    "task": "shake_bottle",
+    "case_id": "296936626eb078de644cd84e",
+    "domain": "test",
+    "exit": 0
+  },
+  {
+    "task": "stack_blocks",
+    "case_id": "0a528a5686be466948989a74",
+    "domain": "test",
+    "exit": 0
+  },
+  {
+    "task": "turn_switch",
+    "case_id": "14715ba4283573e2a3c4455d",
+    "domain": "test",
+    "exit": 0
+  },
+  {
+    "task": "open_laptop",
+    "case_id": "4ae8cb77cb9e02035a0df602",
+    "domain": "test_random",
+    "exit": 0
+  },
+  {
+    "task": "place_bottle",
+    "case_id": "442513135eb12ff5e7cef319",
+    "domain": "test_random",
+    "exit": 0
+  },
+  {
+    "task": "place_fan",
+    "case_id": "7c1da3be698a68d18779ebd4",
+    "domain": "test_random",
+    "exit": 0
+  },
+  {
+    "task": "place_via_divider",
+    "case_id": "fc75a98682ce62892779b804",
+    "domain": "test_random",
+    "exit": 0
+  },
+  {
+    "task": "press_buttons",
+    "case_id": "d0bb1c22b1e9b017093ac7ad",
+    "domain": "test_random",
+    "exit": 0
+  },
+  {
+    "task": "shake_bottle",
+    "case_id": "296936626eb078de644cd84e",
+    "domain": "test_random",
+    "exit": 0
+  },
+  {
+    "task": "stack_blocks",
+    "case_id": "0a528a5686be466948989a74",
+    "domain": "test_random",
+    "exit": 0
+  },
+  {
+    "task": "turn_switch",
+    "case_id": "14715ba4283573e2a3c4455d",
+    "domain": "test_random",
+    "exit": 0
+  }
+]

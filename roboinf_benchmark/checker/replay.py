@@ -15,6 +15,8 @@ from ..robotwin import environment_factory
 from ..suite import BUDGETS, load_suite
 from . import judgment_record
 from .spec import PROTOCOL, TASKS, task_name
+from .switch_recorder import SwitchRecorder
+from .sort_recorder import SortRecorder
 
 
 class ContactRecorder:
@@ -113,7 +115,9 @@ class FanRecorder(ContactRecorder):
         })
 
 
-RECORDERS = {"place_bottle": BottleRecorder, "place_fan": FanRecorder}
+RECORDERS = {"place_bottle": BottleRecorder, "place_fan": FanRecorder,
+             "turn_switch": SwitchRecorder, "press_buttons": SwitchRecorder,
+             "stack_blocks": SortRecorder}
 
 
 def replay(raw, data, robotwin):

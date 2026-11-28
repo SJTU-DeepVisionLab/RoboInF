@@ -1,0 +1,5 @@
+{"task": "place_bottle", "case_id": "000c5ac02dccd3517e366d08", "domain": "test", "task_success": false, "instruction_success": false, "prediction_sha256": "f6c2b73b37285b6602cdf76a80725680dd7aa8e0ac6a67455b96aa507fe6f7df"}
+{"task": "place_fan", "case_id": "03363ae1f675af1f0970d40c", "domain": "test", "task_success": false, "instruction_success": false, "prediction_sha256": "7fc27d0f7cb5974104710662626fb205fc723484aea0c160ccfb4947cc05e703"}
+{"task": "press_buttons", "case_id": "c0be0f44436c4f956f241a75", "domain": "test", "task_success": true, "instruction_success": false, "prediction_sha256": "9ac037799800d48d372798943ed6e8f3fe0a3f4bc0ae557dce88c660704708b1"}
+{"task": "stack_blocks", "case_id": "7b465c5b79d1f9b01275cca0", "domain": "test", "task_success": true, "instruction_success": true, "prediction_sha256": "5f0818a7d1a38cc34b902e241cffe14ab598a238b776494f89b367f5a984feac"}
+{"task": "turn_switch", "case_id": "8ea0fbec8f12c5b8f33d7067", "domain": "test", "task_success": true, "instruction_success": false, "prediction_sha256": "f8133175124fd47555af8a6fcafa51be61dddfc8f833c456882265c24c94208a"}
