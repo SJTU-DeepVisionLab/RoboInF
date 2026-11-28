@@ -6,6 +6,21 @@ for the eight RoboInF tasks. The predicates are the same in `test` and
 `task_success` is TR. `control_success` is JR and requires TR.
 The task contract modules retain the terms in `licenses/RoboTwin-MIT.txt`.
 
+Each [task module](../roboinf_benchmark/checker/tasks) lists its TR criteria
+and the additional criteria for JR. Module names follow the project catalogue.
+Use the dataset ID when selecting cases from a released manifest:
+
+| Project task | Dataset ID |
+| --- | --- |
+| Place Bottle | `place_bottle` |
+| Shake Bottle | `shake_bottle` |
+| Orient Fan | `place_fan` |
+| Select Switch | `turn_switch` |
+| Transport via Divider | `place_via_divider` |
+| Open Laptop | `open_laptop` |
+| Sort Blocks in Order | `stack_blocks` |
+| Press Buttons in Order | `press_buttons` |
+
 `python -m roboinf_benchmark.checker evidence.json` scores the native physics
 evidence object for one rollout. This is **not** a command to score raw action
 predictions: those must first be replayed from the correct case and domain

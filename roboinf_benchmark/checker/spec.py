@@ -1,31 +1,49 @@
+"""Resolve public dataset and recorder IDs at the evidence boundary."""
+
+from .tasks import (
+    open_laptop,
+    orient_fan,
+    place_bottle,
+    press_buttons_in_order,
+    select_switch,
+    shake_bottle,
+    sort_blocks_in_order,
+    transport_via_divider,
+)
+
+# Serialized protocol ID; do not invalidate recorded evidence.
 PROTOCOL = "roboinf.paper_table.origin_archive.v2"
+
 TASK_CHECKS = {
-    "place_the_bottle": (
-        ("target_center_inside_goal", "target_bottle_upright", "active_gripper_open"),
-        ("requested_arm_contact", "passive_bottle_upright")),
-    "phase1_shake_bottle": (
-        ("bottle_held", "final_gripper_closed", "pose_after_shake"),
-        ("active_arm_contact", "inactive_arm_no_contact", "inactive_arm_stationary",
-         "pose_during_shake", "trace_three_cycles", "trace_amplitude", "lifted_and_held",
-         "wrist_position_stable", "wrist_axis_horizontal", "unintended_motion_limited")),
-    "place_fan_orientation": (
-        ("position", "orientation", "upright", "left_gripper_open", "right_gripper_open"),
-        ("requested_arm_contact",)),
-    "turn_switch_row": (
-        ("initially_all_off", "target_on", "released_and_stable"),
-        ("correct_arm_contact", "inactive_arm_stationary", "inter_arm_collision_free", "others_untouched")),
-    "place_via_divider": (
-        ("payload_at_target", "payload_upright", "payload_stable", "both_grippers_open"),
-        ("requested_arm_contact", "inactive_arm_no_contact", "requested_route_followed",
-         "divider_unchanged", "divider_collision_free")),
-    "open_the_laptop": (
-        ("target_angle_reached", "lid_stable", "joint_within_limits"),
-        ("requested_contact_region", "active_arm_contact", "inactive_arm_no_contact")),
-    "sort_blocks_three_in_order": (
-        ("blocks_in_matching_bins", "blocks_on_table", "both_grippers_open", "sort_stable"),
-        ("requested_sort_order",)),
-    "turn_the_switches_in_order": (
-        ("all_switches_on",),
-        ("initially_all_off", "requested_press_order", "correct_arm_contact",
-         "inactive_arm_stationary", "inter_arm_collision_free", "released_and_stable")),
+    "place_bottle": (place_bottle.TR, place_bottle.JR),
+    "shake_bottle": (shake_bottle.TR, shake_bottle.JR),
+    "orient_fan": (orient_fan.TR, orient_fan.JR),
+    "select_switch": (select_switch.TR, select_switch.JR),
+    "transport_via_divider": (transport_via_divider.TR, transport_via_divider.JR),
+    "open_laptop": (open_laptop.TR, open_laptop.JR),
+    "sort_blocks_in_order": (sort_blocks_in_order.TR, sort_blocks_in_order.JR),
+    "press_buttons_in_order": (press_buttons_in_order.TR, press_buttons_in_order.JR),
 }
+
+# IDs on disk may differ from the project catalogue.
+_TASK_IDS = {
+    "place_the_bottle": "place_bottle",
+    "phase1_shake_bottle": "shake_bottle",
+    "place_fan_orientation": "orient_fan",
+    "place_fan": "orient_fan",
+    "turn_switch_row": "select_switch",
+    "turn_switch": "select_switch",
+    "place_via_divider": "transport_via_divider",
+    "open_the_laptop": "open_laptop",
+    "sort_blocks_three_in_order": "sort_blocks_in_order",
+    "stack_blocks": "sort_blocks_in_order",
+    "turn_the_switches_in_order": "press_buttons_in_order",
+    "press_buttons": "press_buttons_in_order",
+}
+
+
+def task_name(identifier):
+    name = _TASK_IDS.get(identifier, identifier)
+    if name not in TASK_CHECKS:
+        raise ValueError(f"Unknown RoboInF task: {identifier!r}")
+    return name
