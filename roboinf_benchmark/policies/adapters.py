@@ -53,7 +53,9 @@ class Gr00t(_Adapter):
 
     def reset(self, context):
         super().reset(context)
-        self.client.reset()
+        receipt = self.client.reset(options={"policy_seed": context.seed})
+        if not isinstance(receipt, dict) or type(receipt.get("policy_seed")) is not int or receipt["policy_seed"] != context.seed:
+            raise ValueError("GR00T server did not acknowledge the episode seed")
 
     def _predict(self, obs):
         views = {"front": "head", "left_wrist": "left_wrist", "right_wrist": "right_wrist"}

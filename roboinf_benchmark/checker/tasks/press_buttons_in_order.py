@@ -2,6 +2,9 @@
 
 import itertools
 
+from ..measurements import EvidenceError, arm_checks, native_samples
+from .select_switch import RowConfig
+
 TR = ("all_switches_on",)
 
 JR = (
@@ -174,3 +177,18 @@ def check_rollout(samples, spec, config, dt):
         final_progress=progress[-1].tolist(),
     )
     return result
+
+
+def measure(evidence):
+    samples = native_samples(
+        evidence, {"progress", "raw_contacts", "switch_clearance_m"}
+    )
+    config = RowConfig(**evidence["task_config"])
+    native = check_rollout(samples, evidence["control_spec"], config, evidence["dt"])
+    if not native["checks"].get("valid_samples"):
+        raise EvidenceError("Button checker rejected sample integrity")
+    checks, native = arm_checks(native, samples)
+    checks["all_switches_on"] = all(
+        x >= config.on_threshold for x in samples[-1]["progress"]
+    )
+    return checks, native

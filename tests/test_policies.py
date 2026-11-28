@@ -32,11 +32,12 @@ class PolicyTest(unittest.TestCase):
         np.testing.assert_array_equal(request["images"]["cam_right_wrist"], 2)
 
         gr_client = Mock()
+        gr_client.reset.return_value = {"policy_seed": ctx.seed}
         gr_client.get_action.return_value = ({"left_arm": np.ones((1, 2, 7)),
                                               "right_arm": np.zeros((1, 2, 7))}, {})
         gr = Gr00t(gr_client)
         gr.reset(ctx)
-        gr_client.reset.assert_called_once_with()
+        gr_client.reset.assert_called_once_with(options={"policy_seed": ctx.seed})
         actions = gr.predict(obs).actions
         np.testing.assert_array_equal(actions[:, :7], 1)
         np.testing.assert_array_equal(actions[:, 7:], 0)
@@ -44,6 +45,9 @@ class PolicyTest(unittest.TestCase):
         self.assertEqual(packet["video"]["front"].shape, (1, 1, 4, 5, 3))
         self.assertEqual(packet["language"]["annotation.human.task_description"], [[ctx.instruction]])
         np.testing.assert_array_equal(packet["state"]["right_arm"][0, 0], np.arange(7, 14))
+        gr_client.reset.return_value = {"policy_seed": 0}
+        with self.assertRaisesRegex(ValueError, "episode seed"):
+            gr.reset(ctx)
 
     def test_openwam_quaternion_order_is_explicit(self):
         obs = observation()

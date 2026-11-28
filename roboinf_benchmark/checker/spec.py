@@ -14,16 +14,17 @@ from .tasks import (
 # Serialized protocol ID; do not invalidate recorded evidence.
 PROTOCOL = "roboinf.paper_table.origin_archive.v2"
 
-TASK_CHECKS = {
-    "place_bottle": (place_bottle.TR, place_bottle.JR),
-    "shake_bottle": (shake_bottle.TR, shake_bottle.JR),
-    "orient_fan": (orient_fan.TR, orient_fan.JR),
-    "select_switch": (select_switch.TR, select_switch.JR),
-    "transport_via_divider": (transport_via_divider.TR, transport_via_divider.JR),
-    "open_laptop": (open_laptop.TR, open_laptop.JR),
-    "sort_blocks_in_order": (sort_blocks_in_order.TR, sort_blocks_in_order.JR),
-    "press_buttons_in_order": (press_buttons_in_order.TR, press_buttons_in_order.JR),
+TASKS = {
+    "place_bottle": place_bottle,
+    "shake_bottle": shake_bottle,
+    "orient_fan": orient_fan,
+    "select_switch": select_switch,
+    "transport_via_divider": transport_via_divider,
+    "open_laptop": open_laptop,
+    "sort_blocks_in_order": sort_blocks_in_order,
+    "press_buttons_in_order": press_buttons_in_order,
 }
+TASK_CHECKS = {name: (module.TR, module.JR) for name, module in TASKS.items()}
 
 # IDs on disk may differ from the project catalogue.
 _TASK_IDS = {

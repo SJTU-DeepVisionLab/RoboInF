@@ -20,6 +20,10 @@ roboinf inspect --data ./RoboInF-4K --domain test_random
 
 ## Running a policy
 
+Use the [bundled runtime setup](../third_party/robotwin/README.md) to populate
+`./RoboTwin`. The upstream installation guide below is for dependencies and
+licensed assets; do not substitute an upstream checkout for the bundled code.
+
 Use Python 3.10 and the [RoboTwin installation and asset instructions](https://github.com/RoboTwin-Platform/RoboTwin). The simulator was exercised with [this RoboTwin revision](https://github.com/RoboTwin-Platform/RoboTwin/tree/266f3aadf505a4f7fe9af0faa41a20f5f47cd123), MPLib 0.2.1 and NumPy 1.26.4. Use a clean environment; on Linux, `PYTHONNOUSERSITE=1` prevents a user-installed NumPy 2 from shadowing the version expected by MPLib's native extension. Set up the simulator and CuRobo planner in the environment that runs the benchmark. The adapter expects the RoboTwin 2 source layout with `envs/_base_task.py`, `env_cfg/task_config/demo_clean.yml`, the Aloha-AgileX embodiment and its expanded planner configuration. Obtain the assets separately under the terms of their providers. Set up the policy being evaluated according to [the policy interfaces](policies.md).
 
 ```sh

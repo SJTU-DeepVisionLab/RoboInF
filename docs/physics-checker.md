@@ -27,3 +27,8 @@ predictions: those must first be replayed from the correct case and domain
 with a physics recorder. A prediction file, final image, or historical label
 is not an acceptable substitute for the trajectory evidence. Publishing this
 layer alone does not certify end-to-end scoring from the public runner.
+
+For evidence containing the rollout's own `case_id` and `domain`, run
+`python -m roboinf_benchmark.checker --judgment evidence.json` to emit one
+JSONL judgment for `roboinf score`. Concatenate one row per case in the domain.
+Without `--judgment`, the command still returns detailed diagnostics.

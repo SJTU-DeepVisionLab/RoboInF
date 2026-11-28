@@ -1,8 +1,9 @@
 import unittest
 
-from roboinf_benchmark.checker import score_episode
+from roboinf_benchmark.checker import EvidenceError, judgment_record, score_episode
 from roboinf_benchmark.checker.scoring import group_checks
 from roboinf_benchmark.checker.spec import PROTOCOL, TASK_CHECKS, task_name
+from roboinf_benchmark.scoring import summarize
 from roboinf_benchmark.suite import BUDGETS
 
 
@@ -34,5 +35,12 @@ class CheckerTaskTests(unittest.TestCase):
         }
         expected = score_episode({**evidence, "task": name})
         self.assertTrue(expected["control_success"])
+        with self.assertRaises(EvidenceError):
+            judgment_record({**evidence, "task": name})
+        judgment = judgment_record(
+            {**evidence, "task": name, "case_id": "a", "domain": "test_random"}
+        )
+        summary = summarize({"a": {"task": "stack_blocks"}}, "test_random", [judgment])
+        self.assertEqual((summary["macro_TR"], summary["macro_JR"]), (1.0, 1.0))
         for key in ("stack_blocks", "sort_blocks_three_in_order"):
             self.assertEqual(score_episode({**evidence, "task": key}), expected)

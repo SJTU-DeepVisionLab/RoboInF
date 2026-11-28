@@ -1,8 +1,8 @@
 from contextlib import ExitStack
+from hashlib import sha256
 from pathlib import Path
 import os
 import sys
-from types import FunctionType, MethodType
 
 import numpy as np
 import yaml
@@ -42,44 +42,7 @@ def _appearance(env, value, root):
     for key in ("wall_texture", "table_texture"):
         if not (root / "assets/background_texture" / (value[key] + ".png")).is_file():
             raise FileNotFoundError(f"Missing RoboTwin texture: {value[key]}")
-    setup, table = env.setup_scene, env.create_table_and_wall.__func__
-    namespace = dict(table.__globals__)
-    # Override only the two texture arguments; preserve the base collision geometry and RNG.
-    for name, field in (("create_box", "wall_texture"), ("create_table", "table_texture")):
-        original = namespace[name]
-
-        def create(*args, _fn=original, _value=value[field], **kwargs):
-            return _fn(*args, **{**kwargs, "texture_id": _value})
-
-        namespace[name] = create
-    cloned = FunctionType(table.__code__, namespace, table.__name__, table.__defaults__, table.__closure__)
-    cloned.__kwdefaults__ = table.__kwdefaults__
-    table_method = MethodType(cloned, env)
-
-    def create_table_and_wall(*args, **kwargs):
-        result = table_method(*args, **kwargs)
-        env.wall_texture, env.table_texture = value["wall_texture"], value["table_texture"]
-        return result
-
-    def setup_scene(**kwargs):
-        return setup(**{**kwargs, "ambient_light": value["ambient_light"], "point_lights": value["point_lights"]})
-
-    env.create_table_and_wall, env.setup_scene = create_table_and_wall, setup_scene
-
-
-def _render(env):
-    import sapien
-    setup = env.setup_scene
-
-    def setup_scene(**kwargs):
-        result = setup(**kwargs)
-        sapien.render.set_camera_shader_dir("rt")
-        sapien.render.set_ray_tracing_samples_per_pixel(32)
-        sapien.render.set_ray_tracing_path_depth(8)
-        sapien.render.set_ray_tracing_denoiser("oidn")
-        return result
-
-    env.setup_scene = setup_scene
+    env.appearance = value
 
 
 class _SceneClock:
@@ -113,7 +76,6 @@ class RoboTwinEpisode:
             def configure(task):
                 if domain == "test_random":
                     _appearance(task, scene["test_random_appearance"], root)
-                _render(task)
 
             env = make_task(case["task"], scene, case, _task_args(root, case["task"]), configure)
             self.env = env
@@ -173,6 +135,9 @@ def environment_factory(root):
     if np.lib.NumpyVersion(np.__version__) >= "2.0.0":
         raise RuntimeError("RoboTwin's native planner requires NumPy 1.x. Use a clean simulator environment.")
     root = Path(root).resolve(strict=True)
-    if not (root / "envs/_base_task.py").is_file():
-        raise ValueError("--robotwin must name a RoboTwin checkout containing envs/_base_task.py")
+    for line in Path(__file__).with_name("robotwin.sha256").read_text().splitlines():
+        digest, name = line.split(maxsplit=1)
+        path = root / name
+        if not path.is_file() or sha256(path.read_bytes()).hexdigest() != digest:
+            raise ValueError(f"{name}: expected the bundled RoboInF runtime; see third_party/robotwin/README.md")
     return lambda scene, case, domain: RoboTwinEpisode(root, scene, case, domain)

@@ -5,6 +5,8 @@ from dataclasses import asdict, dataclass
 
 import numpy as np
 
+from ..measurements import EvidenceError, arm_checks, native_samples
+
 TR = ("bottle_held", "final_gripper_closed", "pose_after_shake")
 
 JR = (
@@ -394,3 +396,36 @@ def check_rollout(
         else None,
         "active_contact_samples": len(active_contacts),
     }
+
+
+def measure(evidence):
+    spec = evidence["control_spec"]
+    samples = native_samples(
+        evidence,
+        {
+            "phase",
+            "pose_check_enabled",
+            "trace_check_enabled",
+            "trace_scalar",
+            "trace_orientation_error_deg",
+            "pose_error_deg",
+            "trace_axis_world",
+            "tcp_position_drift_m",
+            "bottle_center_drift_m",
+            "bottle_height_above_table_m",
+            "active_arm_contact",
+            "inactive_arm_contact",
+            "active_gripper_closed",
+        },
+    )
+    if spec["trace"] == "wrist_rotation" and any(
+        s["trace_check_enabled"] and s["trace_axis_world"] is None for s in samples
+    ):
+        raise EvidenceError("Missing wrist-axis measurement during shaking")
+    native = check_rollout(
+        samples, spec, ShakeConfig(**evidence["task_config"]), evidence["dt"]
+    )
+    checks, native = arm_checks(native, samples)
+    held = bool(evidence["samples"][-1]["holding_arms"])
+    checks.update(bottle_held=held, final_gripper_closed=held)
+    return checks, native

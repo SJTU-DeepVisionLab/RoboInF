@@ -16,6 +16,20 @@ NATIVE_TASKS = {
 
 
 class Scene(Base_Task):
+    appearance = None
+
+    def setup_scene(self, **kwargs):
+        import sapien
+
+        if self.appearance is not None:
+            kwargs.update({key: self.appearance[key] for key in ("ambient_light", "point_lights")})
+        result = super().setup_scene(**kwargs)
+        sapien.render.set_camera_shader_dir("rt")
+        sapien.render.set_ray_tracing_samples_per_pixel(32)
+        sapien.render.set_ray_tracing_path_depth(8)
+        sapien.render.set_ray_tracing_denoiser("oidn")
+        return result
+
     def check_success(self):
         # Held-out policies run to their prescribed horizon.
         return False

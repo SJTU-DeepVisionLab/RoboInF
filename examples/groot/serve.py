@@ -15,9 +15,12 @@ class RoboInFEndpoint:
     def reset(self, options=None):
         import torch
 
-        torch.manual_seed(self.seed)
-        torch.cuda.manual_seed_all(self.seed)
-        return {}
+        seed = (options or {}).get("policy_seed", self.seed)
+        if type(seed) is not int or not 0 <= seed < 2**32:
+            raise ValueError("Expected a uint32 policy seed")
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        return {"policy_seed": seed}
 
     def get_action(self, observation, options=None):
         video = observation["video"]

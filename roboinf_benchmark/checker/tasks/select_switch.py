@@ -4,6 +4,8 @@ from dataclasses import asdict, dataclass
 
 import numpy as np
 
+from ..measurements import arm_checks, native_samples
+
 TR = ("initially_all_off", "target_on", "released_and_stable")
 
 JR = (
@@ -160,3 +162,16 @@ def check_rollout(samples, spec, config, dt):
         "valid_target_contact_count": len(intended),
         "inter_arm_collision_count": len(inter_arm_collisions),
     }
+
+
+def measure(evidence):
+    samples = native_samples(
+        evidence, {"progress", "raw_contacts", "target_clearance_m"}
+    )
+    native = check_rollout(
+        samples,
+        evidence["control_spec"],
+        RowConfig(**evidence["task_config"]),
+        evidence["dt"],
+    )
+    return arm_checks(native, samples)

@@ -19,3 +19,6 @@ license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "licenses/RoboTwin-MIT.txt
 
 [tool.setuptools.packages.find]
 include = ["roboinf_benchmark*"]
+
+[tool.setuptools.package-data]
+roboinf_benchmark = ["robotwin.sha256"]

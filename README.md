@@ -102,7 +102,7 @@ roboinf inspect --data ./RoboInF-4K --domain test
 Expect eight tasks, 115 base scenes and 861 instruction cases. The validation cases use a separate set of 115 scenes. No held-out expert recordings or case judgments are needed to run a policy.
 
 ### Run a policy
-Install [RoboTwin](https://github.com/RoboTwin-Platform/RoboTwin/tree/266f3aadf505a4f7fe9af0faa41a20f5f47cd123), its simulator dependencies and assets. Start a compatible inference server following the [policy guide](docs/policies.md). The four supported client interfaces are `pi_05`, `openwam`, `gr00t`, and `lingbot-va`. For a local OpenPI server on port 8000, put `{"host":"localhost","port":8000}` in `pi05.json` and run:
+Prepare the [bundled RoboTwin runtime](third_party/robotwin/README.md), its simulator dependencies and licensed assets. Start a compatible inference server following the [policy guide](docs/policies.md). The four supported client interfaces are `pi_05`, `openwam`, `gr00t`, and `lingbot-va`. For a local OpenPI server on port 8000, put `{"host":"localhost","port":8000}` in `pi05.json` and run:
 
 ```bash
 roboinf run --data ./RoboInF-4K --robotwin ./RoboTwin --domain val \

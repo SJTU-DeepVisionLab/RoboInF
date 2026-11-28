@@ -10,6 +10,10 @@ checkpoint and the matching [Isaac-GR00T code](https://github.com/NVIDIA/Isaac-G
 python examples/groot/serve.py --checkpoint /path/to/checkpoint --port 5555 --seed 0
 ```
 
+The RoboInF GR00T client sends `--policy-seed` on every reset and requires the
+server to acknowledge that exact seed. The server's `--seed` is only a fallback
+for clients that do not send one (including the pinned native runner).
+
 Use `--policy gr00t` with `{"host":"127.0.0.1","port":5555}` in the simulator
 environment. Use one active episode per server. The server maps the release
 client's front view and two seven-value arm groups to the checkpoint's head
