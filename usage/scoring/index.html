@@ -78,7 +78,10 @@
 </ul>
 
 <h2 id="test">Held-out test</h2>
-<p>The <a href="https://github.com/SJTU-DeepVisionLab/RoboInF/blob/main/docs/physics-checker.md">public physics checker</a> evaluates recorded trajectory evidence. It does not reconstruct that evidence from an action file. Comparisons with paper results require matching simulator dependencies, assets, dynamics, rendering and policy settings; matching the scene seed alone does not verify the full initial state.</p>
+<p>For any of the eight tasks in <code>test</code> or <code>test_random</code>, the <a href="https://github.com/SJTU-DeepVisionLab/RoboInF/blob/main/docs/physics-checker.md">public physics checker</a> can replay a one-case <code>joint14_absolute</code> prediction. It reconstructs the scene, executes the actions, observes the passive tail, and emits a judgment bound to the SHA-256 of the input. It does not yet replay EEF predictions.</p>
+<pre>python -m roboinf_benchmark.checker.replay --data ./RoboInF-4K \
+  --robotwin ./RoboTwin prediction.jsonl &gt; receipt.json</pre>
+<p>See <a href="https://github.com/MINT-SJTU/RoboScope-Kit/pull/217">RoboScope Kit PR #217</a> for the adapter and the status of the native comparison. Comparisons with paper results require matching simulator dependencies, assets, dynamics, rendering and policy settings.</p>
 
     <nav class="pager"><a class="prev" href="../policies/"><span>← Previous</span><b>Policy Interfaces</b></a></nav>
   </div></section>
