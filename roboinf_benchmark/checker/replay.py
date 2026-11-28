@@ -14,21 +14,14 @@ from ..contracts import JOINT, ActionChunk
 from ..robotwin import environment_factory
 from ..suite import BUDGETS, load_suite
 from . import judgment_record
-from .spec import PROTOCOL
+from .spec import PROTOCOL, TASKS, task_name
 
 
-class BottleRecorder:
-    def __init__(self, episode, instruction):
-        match = re.fullmatch(
-            r"Move (bottle_(?:left|right)) to (goal_(?:left|right)) using the (left|right) arm\.",
-            instruction,
-        )
-        if not match:
-            raise ValueError("Unknown Place Bottle instruction")
-        self.target, self.goal, self.arm = match.groups()
+class ContactRecorder:
+    def __init__(self, episode, target, arm):
         self.episode = episode
+        self.target, self.arm = target, arm
         env = episode.env
-        self.initial_z = {name: self.center(name)[2] for name in env.objects}
         self.links = {}
         for arm in ("left", "right"):
             names = set(getattr(env.robot, arm + "_fix_gripper_name"))
@@ -39,12 +32,6 @@ class BottleRecorder:
             self.links.update(dict.fromkeys(names, arm))
         self.samples = []
         self.capture(0)
-
-    def center(self, name):
-        return np.asarray(
-            self.episode.env.objects[name].get_functional_point(0, "pose").p,
-            dtype=np.float64,
-        )
 
     def capture(self, step):
         arms = set()
@@ -59,6 +46,23 @@ class BottleRecorder:
                 "target_contacts": [{"arm": arm} for arm in sorted(arms)],
             }
         )
+
+    def evidence(self, checks):
+        return {"native_final": {"checks": checks}, "samples": self.samples,
+                "control_spec": {"active_arm": self.arm}, "dt": self.episode.dt}
+
+
+class BottleRecorder(ContactRecorder):
+    def __init__(self, episode, instruction):
+        match = re.fullmatch(r"Move (bottle_(?:left|right)) to (goal_(?:left|right)) using the (left|right) arm\.", instruction)
+        if not match:
+            raise ValueError("Unknown Place Bottle instruction")
+        target, self.goal, arm = match.groups()
+        super().__init__(episode, target, arm)
+        self.initial_z = {name: self.center(name)[2] for name in episode.env.objects}
+
+    def center(self, name):
+        return np.asarray(self.episode.env.objects[name].get_functional_point(0, "pose").p, dtype=np.float64)
 
     def finish(self):
         env = self.episode.env
@@ -77,12 +81,39 @@ class BottleRecorder:
                 getattr(env.robot, f"is_{self.arm}_gripper_open")()
             ),
         }
-        return {
-            "native_final": {"checks": checks},
-            "samples": self.samples,
-            "control_spec": {"active_arm": self.arm},
-            "dt": self.episode.dt,
-        }
+        return self.evidence(checks)
+
+
+class FanRecorder(ContactRecorder):
+    DIRECTIONS = ("front", "front right", "right", "back right", "back", "back left", "left", "front left")
+
+    def __init__(self, episode, instruction):
+        match = re.fullmatch(r"Use the (left|right) arm to place the fan facing ([a-z ]+) on the pad\.", instruction)
+        if not match or match[2] not in self.DIRECTIONS:
+            raise ValueError("Unknown Orient Fan instruction")
+        super().__init__(episode, episode.env.fan.get_name(), match[1])
+        self.heading = 45 * self.DIRECTIONS.index(match[2])
+        self.pad = episode.env.pad.get_pose().p.copy()
+
+    def finish(self):
+        from transforms3d.quaternions import quat2mat
+
+        env = self.episode.env
+        pose = env.fan.get_pose()
+        rotation = quat2mat(np.asarray(pose.q, dtype=np.float64))
+        x, y = rotation[:2, 2]
+        heading = np.rad2deg(np.arctan2(x, y))
+        error = abs((heading - self.heading + 180) % 360 - 180)
+        return self.evidence({
+            "position": bool(np.all(np.abs(pose.p - self.pad) < 0.04)),
+            "orientation": bool(np.hypot(x, y) > 1e-8 and error <= 10),
+            "upright": bool(np.rad2deg(np.arccos(np.clip(rotation[2, 1], -1, 1))) <= 10),
+            "left_gripper_open": bool(env.robot.is_left_gripper_open()),
+            "right_gripper_open": bool(env.robot.is_right_gripper_open()),
+        })
+
+
+RECORDERS = {"place_bottle": BottleRecorder, "place_fan": FanRecorder}
 
 
 def replay(raw, data, robotwin):
@@ -92,7 +123,7 @@ def replay(raw, data, robotwin):
     case = cases[row["case_id"]]
     if case["task"] != row["task"] or row["action_spec"] != JOINT.name:
         raise ValueError("Task or action specification mismatch")
-    if case["task"] != "place_bottle":
+    if case["task"] not in RECORDERS:
         raise NotImplementedError(f"No prediction recorder for {case['task']}")
     actions = ActionChunk(np.asarray(row["actions"]), row["action_spec"]).checked(
         JOINT.name
@@ -104,7 +135,7 @@ def replay(raw, data, robotwin):
         limit = min(BUDGETS[case["task"]], episode.step_limit)
         if len(actions) != limit or row["action_count"] != limit:
             raise ValueError("Prediction does not reach the native endpoint")
-        recorder = BottleRecorder(episode, case["instruction"])
+        recorder = RECORDERS[case["task"]](episode, case["instruction"])
         episode.clock.on_step = recorder.capture
         for index, action in enumerate(actions):
             if index % 20 == 0:
@@ -129,10 +160,7 @@ def replay(raw, data, robotwin):
             "domain": domain,
             "protocol": PROTOCOL,
             "metric_spec_hash": hashlib.sha256(
-                Path(__file__)
-                .with_name("tasks")
-                .joinpath("place_bottle.py")
-                .read_bytes()
+                Path(TASKS[task_name(case["task"])].__file__).read_bytes()
             ).hexdigest(),
         }
     )

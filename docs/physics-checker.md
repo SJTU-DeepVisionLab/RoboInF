@@ -35,7 +35,7 @@ Without `--judgment`, the command still returns detailed diagnostics.
 
 ### Prediction replay (partial)
 
-For a one-case `joint14_absolute` Place Bottle prediction, the replay command
+For a one-case `joint14_absolute` Place Bottle or Orient Fan prediction, the replay command
 loads the released case and scene, measures contacts on each physics step, and
 prints a judgment bound to the SHA-256 of the prediction file:
 
@@ -45,5 +45,7 @@ python -m roboinf_benchmark.checker.replay --data ./RoboInF-4K \
 ```
 
 Unsupported tasks and incomplete trajectories raise errors, not failed policy
-judgments. This path has been checked against a historical clear receipt; it
-is not yet a validated replay evaluator for the full benchmark.
+judgments. One historical clear receipt per supported task was reproduced,
+including its prediction hash. Replaying the clear fan actions in the randomized
+scene also exercised the recorder there. This is an open-loop check, not a
+policy evaluation on randomized observations.

@@ -60,6 +60,7 @@ For task videos, per-task checkers and full results, go check out our <a href="h
 
 
 ## ⭐ Update
+- [2026.11] RoboInF adapters for `test` and `test_random` are available in [RoboScope Kit PR #217](https://github.com/MINT-SJTU/RoboScope-Kit/pull/217). The [historical clear comparison](reports/groot-clear-861) matched on all 861 cases; formal Kit acceptance is pending.
 - [2026.11] **🔥 RoboInF v1.0.0 is released!** The evaluation runner and four policy interfaces (`pi_05`, `openwam`, `gr00t`, `lingbot-va`) are now open source.
 - [2026.11] The **RoboInF-4K** dataset is available on [Hugging Face](https://huggingface.co/datasets/JGuo666/RoboInF-4K) 🤗, and the [project page](https://sjtu-deepvisionlab.github.io/RoboInF/) is online.
 
