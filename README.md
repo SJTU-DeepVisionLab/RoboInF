@@ -60,7 +60,7 @@ For task videos, per-task checkers and full results, go check out our <a href="h
 
 
 ## ⭐ Update
-- [2026.11] RoboInF adapters for `test` and `test_random` are available in [RoboScope Kit PR #217](https://github.com/MINT-SJTU/RoboScope-Kit/pull/217). The [historical clear comparison](reports/groot-clear-861) matched on all 861 cases; formal Kit acceptance is pending.
+- [2026.11] RoboInF is integrated with RoboScope Kit for clear (`test`) and randomized (`test_random`) evaluation. Across all eight tasks, GR00T produced identical actions and TR/JR judgments on the [160-rollout Kit/native review sample](reports/groot-kit-native-review/). [Kit PR #217](https://github.com/MINT-SJTU/RoboScope-Kit/pull/217) is awaiting acceptance.
 - [2026.11] **🔥 RoboInF v1.0.0 is released!** The evaluation runner and four policy interfaces (`pi_05`, `openwam`, `gr00t`, `lingbot-va`) are now open source.
 - [2026.11] The **RoboInF-4K** dataset is available on [Hugging Face](https://huggingface.co/datasets/JGuo666/RoboInF-4K) 🤗, and the [project page](https://sjtu-deepvisionlab.github.io/RoboInF/) is online.
 
@@ -112,16 +112,22 @@ roboinf run --data ./RoboInF-4K --robotwin ./RoboTwin --domain val \
 
 The output records the actions executed in that rollout. See the [evaluation protocol](docs/benchmark.md) for camera and action conventions, step budgets, and how to aggregate judgments.
 
-### Score judgments
+### Replay a prediction and score judgments
+For any of the eight tasks in `test` or `test_random`, replay a **single-case joint-action** prediction in the simulator to get its TR/JR judgment:
+
 ```bash
-roboinf score --data ./RoboInF-4K --domain val --judgments val-judgments.jsonl
+python -m roboinf_benchmark.checker.replay --data ./RoboInF-4K \
+  --robotwin ./RoboTwin prediction.jsonl > receipt.json
+```
+
+The receipt includes `prediction_sha256` so the judgment can be checked against the executed actions. To aggregate a **complete** domain, export the four judgment fields for each case as described in the [evaluation protocol](docs/benchmark.md#predictions-and-scores), then run:
+
+```bash
+roboinf score --data ./RoboInF-4K --domain test --judgments test-judgments.jsonl
 ```
 
 TR uses `task_success`; JR requires both `task_success` and `instruction_success`.
-The [physics checker](docs/physics-checker.md) evaluates measured trajectory evidence.
-`roboinf score` aggregates judgments; neither command assigns a score directly to an action file.
-See the [GR00T model card](https://huggingface.co/JGuo666/GR00T-N1.7-RoboInF-C2C-30K)
-for checkpoint release status.
+The [physics checker](docs/physics-checker.md) evaluates measured trajectory evidence; `roboinf score` only aggregates judgments. The published [GR00T checkpoint](https://huggingface.co/JGuo666/GR00T-N1.7-RoboInF-C2C-30K) and [paired predictions](reports/groot-kit-native-review/) can be used to reproduce the joint-action comparison. EEF replay was not validated and is not supported by this judge.
 
 
 ## 📝 License

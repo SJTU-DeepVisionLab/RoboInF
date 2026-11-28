@@ -53,14 +53,27 @@ A predictions JSONL file contains one row per completed case. Each row records t
 
 Official judgments require replay or equivalent simulator evidence for the policy's own rollout. Expert demonstration labels must never be reused to score a new policy. The [physics checker](physics-checker.md) scores measured evidence. The public aggregation command consumes judgments produced by an evaluator; it does not infer physical success from action arrays.
 
-A checker export has exactly these fields per case (illustrative values):
+For a single-case `joint14_absolute` prediction from any task in `test` or `test_random`, run the public judge in the simulator environment:
+
+```sh
+python -m roboinf_benchmark.checker.replay --data ./RoboInF-4K \
+  --robotwin ./RoboTwin prediction.jsonl > receipt.json
+```
+
+This replays the executed actions in the specified case and domain, including the passive tail. The receipt contains the four judgment fields below plus `prediction_sha256`, the SHA-256 of the original, uncompressed JSONL bytes. It is the format consumed by the RoboScope Kit adapter. EEF predictions cannot be scored with this replay command.
+
+`roboinf score` takes exactly four fields per case (illustrative values):
 
 ```json
 {"case_id":"example","domain":"val","task_success":true,"instruction_success":false}
 ```
 
 ```sh
-roboinf score --data ./RoboInF-4K --domain val --judgments val-judgments.jsonl
+# Put one replay receipt per test case in receipts/test/. Preserve the originals.
+jq -c '{case_id, domain, task_success, instruction_success}' receipts/test/*.json > test-judgments.jsonl
+roboinf score --data ./RoboInF-4K --domain test --judgments test-judgments.jsonl
 ```
 
 TR uses `task_success`; JR requires both booleans. Dropouts and infrastructure errors must be resolved before producing a score. The command rejects unknown, duplicate and missing cases rather than changing the denominator. Comparisons with paper results additionally require matching simulator dependencies, assets, dynamics, rendering, and policy settings; merely matching the scene seed does not verify the full initial state.
+
+For an example of a reduced integration check rather than a full benchmark, see the [eight-task GR00T Kit/native comparison](../reports/groot-kit-native-review/), including the frozen case list, predictions, per-case judgments and verifier.

@@ -49,4 +49,5 @@ Unsupported tasks and incomplete trajectories raise errors, not failed policy
 judgments. [One historical clear receipt per supported task](../reports/joint-replay-smoke/historical-clear.jsonl) was reproduced,
 including its prediction hash. Replaying the clear fan actions in the randomized
 scene also exercised the recorder there. This is an open-loop check, not a
-policy evaluation on randomized observations.
+policy evaluation on randomized observations. For closed-loop evidence on both
+domains, see the [160-rollout GR00T comparison](../reports/groot-kit-native-review/).
