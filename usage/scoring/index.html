@@ -81,7 +81,11 @@
 <p>For any of the eight tasks in <code>test</code> or <code>test_random</code>, the <a href="https://github.com/SJTU-DeepVisionLab/RoboInF/blob/main/docs/physics-checker.md">public physics checker</a> can replay a one-case <code>joint14_absolute</code> prediction. It reconstructs the scene, executes the actions, observes the passive tail, and emits a judgment bound to the SHA-256 of the input. It does not yet replay EEF predictions.</p>
 <pre>python -m roboinf_benchmark.checker.replay --data ./RoboInF-4K \
   --robotwin ./RoboTwin prediction.jsonl &gt; receipt.json</pre>
-<p>See <a href="https://github.com/MINT-SJTU/RoboScope-Kit/pull/217">RoboScope Kit PR #217</a> for the adapter and the status of the native comparison. Comparisons with paper results require matching simulator dependencies, assets, dynamics, rendering and policy settings.</p>
+<p>The receipt also includes <code>prediction_sha256</code>. Keep it to verify the prediction. When aggregating a full domain with <code>roboinf score</code>, export only the four judgment fields listed above.</p>
+
+<h2 id="kit">RoboScope Kit comparison</h2>
+<p>GR00T ran on all eight tasks in clear and randomized scenes using both the Kit adapter and the released native runner. Across 160 rollouts, all 80 paired action traces and TR/JR judgments matched. On each path the fresh repeat reproduced every first-round result. These are sampled integration checks, not new full-suite scores.</p>
+<p>See the <a href="https://github.com/SJTU-DeepVisionLab/RoboInF/tree/fd4b824dd19ab5a8c1cf3f5a00a76578e0ce445e/reports/groot-kit-native-review">per-task results, predictions and reproduction commands</a> or <a href="https://github.com/MINT-SJTU/RoboScope-Kit/pull/217">Kit PR #217</a> for the acceptance status.</p>
 
     <nav class="pager"><a class="prev" href="../policies/"><span>← Previous</span><b>Policy Interfaces</b></a></nav>
   </div></section>
